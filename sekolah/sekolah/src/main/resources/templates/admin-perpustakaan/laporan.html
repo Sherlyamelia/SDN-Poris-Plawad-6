@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Laporan - Perpustakaan SDN Poris Pelawad 6</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS Eksternal -->
+  <link rel="stylesheet" th:href="@{/css/laporan.css}" />
+
+  <!-- Icon & SweetAlert -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+<!-- NAVBAR -->
+<div class="navbar">
+  <span class="menu-icon" onclick="toggleSidebar()">☰</span>
+  <div class="right-section">
+    <i class="fa fa-user"></i>
+    <h1>ADMIN PERPUSTAKAAN</h1>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <ul class="menu-list">
+    <div class="admin-profile">
+      <img src="https://i.pravatar.cc/80?img=12" alt="Profil Admin" class="admin-image">
+      <p class="admin-name">ANISA AMELIA</p>
+    </div>
+    <ul class="nav">
+      <li><a th:href="@{/admin-perpustakaan/perpus-panel}" class="nav-link"><i class="fas fa-home"></i> Beranda</a></li>
+      <li><a th:href="@{/admin-perpustakaan/data-buku}" class="nav-link"><i class="fas fa-book"></i> Buku</a></li>
+      <li><a th:href="@{/admin-perpustakaan/data-pengunjung}" class="nav-link"><i class="fas fa-users"></i> Pengunjung</a></li>
+      <li><a th:href="@{/admin-perpustakaan/data-peminjaman}" class="nav-link"><i class="fas fa-user-check"></i> Peminjam</a></li>
+      <li><a th:href="@{/admin-perpustakaan/data-pengembalian}" class="nav-link"><i class="fas fa-undo-alt"></i> Pengembalian</a></li>
+      <li><a th:href="@{/admin-perpustakaan/laporan}" class="nav-link active"><i class="fas fa-exchange-alt"></i> Laporan</a></li>
+      <li><a href="#" onclick="confirmLogout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+  </ul>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content" id="content">
+  <h1 class="page-title">Laporan</h1>
+
+  <!-- Baris pertama: Search -->
+  <div class="search-row">
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Cari nama Buku" onkeyup="searchTable()">
+      <i class="fas fa-search search-icon"></i>
+    </div>
+  </div>
+
+  <!-- Baris kedua: Filter + Download kiri, Tambah Laporan kanan -->
+  <div class="action-row">
+    <div class="filter-container">
+      <label for="KeteranganFilter">Filter Keterangan:</label>
+      <select id="KeteranganFilter" onchange="filterByKeterangan()">
+        <option value="">Semua</option>
+        <option value="Hilang">Hilang</option>
+        <option value="Rusak">Rusak</option>
+      </select>
+
+      <button onclick="downloadTable()" class="icon-button" title="Download CSV">
+        <i class="fas fa-download"></i>
+      </button>
+    </div>
+
+    <div class="button-container">
+      <button class="create-button" onclick="window.location.href='/admin-perpustakaan/tambah-laporan'">+ Tambah Laporan</button>
+    </div>
+  </div>
+
+  <!-- Tabel Laporan -->
+  <table id="guruTable">
+    <thead>
+    <tr>
+      <th>No</th>
+      <th>Nama Buku</th>
+      <th>Pengarang</th>
+      <th>Qty</th>
+      <th>Keterangan</th>
+      <th>Foto</th>
+      <th>Ubah</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="laporan, iterStat : ${laporanList}">
+      <td th:text="${iterStat.count}">1</td>
+      <td th:text="${laporan.namaBuku}">Contoh Buku</td>
+      <td th:text="${laporan.pengarang}">Contoh Pengarang</td>
+      <td th:text="${laporan.qty}">0</td>
+      <td th:text="${laporan.keterangan}">Hilang</td>
+      <td>
+        <img th:if="${laporan.foto != null}" th:src="@{'/img/laporanbuku/' + ${laporan.foto}}" alt="Foto Buku" width="100" />
+        <span th:if="${laporan.foto == null}">Tidak Ada Foto</span>
+      </td>
+      <td>
+        <a th:href="@{'/admin-perpustakaan/laporan/edit/' + ${laporan.id}}" class="edit-btn" title="Edit">
+          <i class="fas fa-edit"></i>
+        </a>
+        <a th:href="@{'/admin-perpustakaan/laporan/delete/' + ${laporan.id}}" class="delete-btn" title="Hapus">
+          <i class="fas fa-trash"></i>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="button-container">
+    <strong>Total Jumlah Buku: <span id="totalQty" th:text="${totalQty}">0</span></strong>
+  </div>
+</div>
+
+<script>
+  // Pencarian berdasarkan nama buku
+  function searchTable() {
+    const input = document.getElementById("searchInput").value.toLowerCase();
+    const filter = document.getElementById("KeteranganFilter").value.toLowerCase();
+    const table = document.getElementById("guruTable");
+    const trs = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+    for (let i = 0; i < trs.length; i++) {
+      const tdNama = trs[i].getElementsByTagName("td")[1];
+      const tdKet = trs[i].getElementsByTagName("td")[4];
+      const namaText = tdNama?.textContent.toLowerCase() || "";
+      const ketText = tdKet?.textContent.toLowerCase() || "";
+
+      const cocokNama = namaText.includes(input);
+      const cocokKet = filter === "" || ketText === filter;
+
+      trs[i].style.display = (cocokNama && cocokKet) ? "" : "none";
+    }
+  }
+
+  // Filter berdasarkan keterangan
+  function filterByKeterangan() {
+    searchTable(); // digabung agar bekerja bersama pencarian
+  }
+
+  // Export tabel ke CSV
+  function downloadTable() {
+    const table = document.getElementById("guruTable");
+    let csv = [];
+    const rows = table.querySelectorAll("tr");
+
+    for (let row of rows) {
+      let cols = row.querySelectorAll("td, th");
+      let rowData = [];
+      for (let col of cols) {
+        let text = col.innerText.replace(/"/g, '""');
+        rowData.push(`"${text}"`);
+      }
+      csv.push(rowData.join(","));
+    }
+
+    const csvFile = new Blob([csv.join("\n")], { type: "text/csv" });
+    const url = URL.createObjectURL(csvFile);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "laporan_buku.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  // Fungsi lainnya
+  function toggleSidebar() {
+    document.getElementById("sidebar").classList.toggle("sidebar-hidden");
+    document.getElementById("content").classList.toggle("sidebar-collapsed");
+  }
+
+  function toggleSubmenu(event) {
+    event.preventDefault();
+    const submenuContainer = event.target.closest(".has-submenu");
+    const submenu = submenuContainer.querySelector(".submenu");
+    const icon = submenuContainer.querySelector(".submenu-toggle");
+    const isOpen = submenu.style.display === "block";
+
+    document.querySelectorAll(".submenu").forEach(s => s.style.display = "none");
+    document.querySelectorAll(".submenu-toggle").forEach(i => i.style.transform = "rotate(0deg)");
+    document.querySelectorAll(".has-submenu").forEach(hs => hs.classList.remove("submenu-open"));
+
+    if (!isOpen) {
+      submenu.style.display = "block";
+      icon.style.transform = "rotate(90deg)";
+      submenuContainer.classList.add("submenu-open");
+    }
+  }
+
+  document.querySelectorAll('.menu-list a').forEach(link => {
+    link.addEventListener('click', function (e) {
+      if (this.getAttribute("href") === "#") e.preventDefault();
+      document.querySelectorAll('.menu-list a').forEach(el => el.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  function confirmLogout() {
+    Swal.fire({
+      title: 'Yakin ingin Logout?',
+      text: "Anda akan keluar dari sistem.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ya, Logout!',
+      cancelButtonText: 'Batal'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "/login";
+      }
+    });
+  }
+
+  function showForm() {
+    document.getElementById('formContainer').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+  }
+
+  function hideForm() {
+    document.getElementById('formContainer').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const cancelBtn = document.querySelector('.btn-batal');
+    if (cancelBtn) {
+      cancelBtn.addEventListener('click', function () {
+        window.location.href = '/admin-perpustakaan/laporan';
+      });
+    }
+
+    const form = document.getElementById("addBookForm");
+    if (form) {
+      form.reset();
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        Swal.fire({
+          title: 'Simpan Data?',
+          text: "Pastikan data yang diisi sudah benar.",
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya, simpan',
+          cancelButtonText: 'Batal'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            form.submit();
+          }
+        });
+      });
+    }
+
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        const deleteUrl = this.getAttribute('href');
+
+        Swal.fire({
+          title: 'Yakin ingin menghapus?',
+          text: "Data yang dihapus tidak dapat dikembalikan.",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#d33',
+          cancelButtonColor: '#3085d6',
+          confirmButtonText: 'Ya, hapus',
+          cancelButtonText: 'Batal'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = deleteUrl;
+          }
+        });
+      });
+    });
+
+    if (typeof setupEditButtons === 'function') setupEditButtons();
+    if (typeof setupDeleteButtons === 'function') setupDeleteButtons();
+  });
+</script>
+</body>
+</html>

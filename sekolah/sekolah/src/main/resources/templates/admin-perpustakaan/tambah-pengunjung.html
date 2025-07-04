@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tambah Pengunjung - Perpustakaan SDN Poris Pelawad 6</title>
+
+  <!-- Icon dan Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Font & CSS Eksternal -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/tambah-pengunjung.css}" />
+</head>
+
+<body>
+
+<div class="navbar">
+  <span class="menu-icon" onclick="toggleSidebar()">☰</span>
+  <div class="right-section">
+    <i class="fa fa-user"></i>
+    <h1>ADMIN PERPUSTAKAAN</h1>
+  </div>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <ul class="menu-list">
+    <div class="admin-profile">
+      <img src="https://i.pravatar.cc/80?img=12" alt="Profil Admin" class="admin-image">
+      <p class="admin-name">ANISA AMELIA</p>
+    </div>
+    <ul class="nav">
+      <li><a th:href="@{/admin-perpustakaan/perpus-panel}" class="nav-link"><i class="fas fa-home"></i> Beranda</a></li>
+      <li><a th:href="@{/admin-perpustakaan/data-buku}" class="nav-link"><i class="fas fa-book"></i> Buku</a></li>
+      <li><a th:href="@{/admin-perpustakaan/data-pengunjung}" class="nav-link"><i class="fas fa-users"></i> Pengunjung</a></li> <!-- Tambahan -->
+      <li><a th:href="@{/admin-perpustakaan/data-peminjaman}" class="nav-link"><i class="fas fa-user-check"></i> Peminjam</a></li>
+      <li><a th:href="@{/admin-perpustakaan/data-pengembalian}" class="nav-link"><i class="fas fa-undo-alt"></i> Pengembalian</a></li>
+      <li><a th:href="@{/admin-perpustakaan/laporan}" class="nav-link"><i class="fas fa-exchange-alt"></i> Laporan</a></li>
+      <li><a href="#" onclick="confirmLogout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+  </ul>
+</div>
+
+<!-- Main Content -->
+<div class="form-wrapper">
+  <div class="floating-form">
+    <h2>Tambah Data Pengunjung</h2>
+    <form th:action="@{/admin-perpustakaan/save-pengunjung}" method="post" th:object="${pengunjung}">
+
+      <label for="nama">Nama Pengunjung:</label>
+      <input type="text" id="nama" name="nama" th:field="*{nama}" required>
+
+      <label for="jumlah">Jumlah Pengunjung:</label>
+      <input type="number" id="jumlah" name="jumlah" th:field="*{jumlah}" required>
+
+      <!-- HARI KUNJUNGAN DIHAPUS -->
+
+      <label for="tanggal">Tanggal Kunjungan:</label>
+      <input type="date" id="tanggal" name="tanggal" th:field="*{tanggal}" required>
+
+      <label for="keperluan">Keperluan:</label>
+      <textarea id="keperluan" name="keperluan" th:field="*{keperluan}" rows="3" required></textarea>
+
+      <div class="button-container">
+        <a th:href="@{/admin-perpustakaan/data-pengunjung}" class="btn-batal">Batal</a>
+        <button type="submit" class="btn-simpan">Simpan</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+</div>
+
+<script>
+  // Toggle sidebar
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.querySelector('.main-content');
+
+    sidebar.classList.toggle('sidebar-hidden');
+    mainContent.classList.toggle('full');
+  }
+
+  // Konfirmasi Logout
+  function confirmLogout() {
+    Swal.fire({
+      title: 'Yakin ingin Logout?',
+      text: "Anda akan keluar dari sistem.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ya, Logout!',
+      cancelButtonText: 'Batal'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "/login";
+      }
+    });
+  }
+
+  // Handler saat form tambah pengunjung disubmit (jika menggunakan localStorage)
+  document.getElementById("addVisitorForm")?.addEventListener("submit", function (event) {
+    event.preventDefault(); // Cegah reload halaman
+
+    // Ambil data dari input
+    const nama = document.getElementById("nama").value;
+    const jumlah = document.getElementById("jumlah").value;
+    const tanggal = document.getElementById("tanggal").value;
+    const keperluan = document.getElementById("keperluan").value;
+
+    // Buat objek data baru
+    const dataBaru = {
+      nama,
+      jumlah,
+      tanggal,
+      keperluan
+    };
+
+    // Ambil data lama dari localStorage
+    let daftarPengunjung = JSON.parse(localStorage.getItem("pengunjung")) || [];
+
+    // Tambahkan data baru ke array
+    daftarPengunjung.push(dataBaru);
+
+    // Simpan kembali ke localStorage
+    localStorage.setItem("pengunjung", JSON.stringify(daftarPengunjung));
+
+    // Redirect ke halaman Data Pengunjung
+    window.location.href = "Data Pengunjung.html";
+  });
+
+  // Inisialisasi saat halaman dimuat
+  window.onload = function () {
+  };
+</script>
+</body>
+</html>

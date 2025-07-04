@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekstrakurikuler - SDN PORIS PELAWAD 6</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/program-adiwiyata.css">
+</head>
+
+<body>
+<header>
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="/img/Logo.png" alt="Logo SDN Poris Pelawad 6" class="logo-img">
+                <span class="logo-text">SDN PORIS PELAWAD 6</span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a th:href="@{/}">Beranda</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Profil</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/profil/visi-misi}">Visi & Misi</a>
+                        <a th:href="@{/profil/guru-tendik}">Guru & Tendik</a>
+                        <a th:href="@{/profil/sarana-prasarana}">Sarana & Prasana</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Kesiswaan</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/kesiswaan/tata-tertib}">Tata Tertib</a>
+                        <a th:href="@{/kesiswaan/ekstrakurikuler}">Ekstrakurikuler</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Adiwiyata</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/adiwiyata/ipmlh}">IPMLH</a>
+                        <a th:href="@{/adiwiyata/visi-misi-adiwiyata}">Visi & Misi Adiwiyata</a>
+                        <a th:href="@{/adiwiyata/struktur-adiwiyata}">Struktur Adiwiyata</a>
+                        <a th:href="@{/adiwiyata/program-adiwiyata}">Program Adiwiyata</a>
+                        <a th:href="@{/adiwiyata/dokumentasi-adiwiyata}">Dokumentasi</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Prestasi</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/prestasi/prestasi-sekolah}">Prestasi Sekolah</a>
+                        <a th:href="@{/prestasi/prestasi-guru}">Prestasi Guru</a>
+                        <a th:href="@{/prestasi/prestasi-murid}">Prestasi Murid</a>
+                        <a th:href="@{/prestasi/prestasi-kelas}">Prestasi Kelas</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Informasi</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/informasi/ppdb}">PPDB</a>
+                        <a th:href="@{/informasi/berita}">Berita</a>
+                        <a th:href="@{/informasi/perpustakaan}">Perpustakaan</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+</header>
+
+    <section class="hero">
+        <h1></h1>
+    </section>
+    
+    <div class="container">
+        <!-- Program Boxes with OnClick Events -->
+        <div class="programs">
+          <!-- Add 11 program boxes -->
+          <div onclick="showContent('polisi')" class="program-box">
+            <h3>KEBERSIHAN,FUNGSI SANITASI,dan DRAINASE SEKOLAH</h3>
+          </div>
+          <div onclick="showContent('pengelolaan')" class="program-box">
+            
+            <h3>PENGELOLAAN SAMPAH</h3>
+          </div>
+          <div onclick="showContent('penghijauan')" class="program-box">
+          
+            <h3>PENANAMAN DAN PEMELIHARAAN POHON/TANAMAN</h3>
+          </div>
+          <div onclick="showContent('konservasi')" class="program-box">
+            
+            <h3>KONSERVASI AIR </h3>
+          </div>
+          <div onclick="showContent('tanaman')" class="program-box">
+            
+            <h3>KONSERVASI ENERGI</h3>
+          </div>
+          <div onclick="showContent('kompos')" class="program-box">
+           
+            <h3>INOVASI PENERAPAN PERILAKU RAMAH LINGKUNGAN</h3>
+          </div>
+          <div onclick="showContent('reboisasi')" class="program-box">
+            
+            <h3>PEMBENTUKAN JEJARING KERJA dan KOMUNIKASI</h3>
+          </div>
+          <div onclick="showContent('penanaman')" class="program-box">
+           
+            <h3> PENERAPAN PERILAKU RAMAH LINGKUNGAN HIDUP ( PRLH )</h3>
+          </div>
+          <div onclick="showContent('daur')" class="program-box">
+            
+            <h3>KEGIATAN KAMPANYE dan PUBLIKASI GPBLHS</h3>
+          </div>
+          <div onclick="showContent('hijau')" class="program-box">
+            
+            <h3>KADER ADIWIYATA</h3>
+          </div>
+    
+        </div>
+    
+        <!-- Add 11 Content Sections -->
+        <div id="polisi" class="content">
+            <h2>KEBERSIHAN, FUNGSI SANITASI, dan DRAINASE SEKOLAH</h2>
+            <p class="description">
+              Langkah-langkah yang dilakukan:
+            </p>
+            <ul>
+              <li>Membersihkan semua ruang dan lingkungan sekolah</li>
+              <li>Membersihkan toilet dan tempat cuci tangan</li>
+              <li>Membersihkan drainase / selokan</li>
+              <li>Mengadakan sarpras toilet dan tempat cuci tangan (gayung, sabun, petunjuk penggunaan)</li>
+              <li>Mengadakan lomba kebersihan kelas</li>
+              <li>Melaksanakan kegiatan Jumat bersih</li>
+              <li>Menguras selokan dengan diesel</li>
+              <li>Menambahkan ikan di selokan untuk memakan jentik-jentik nyamuk</li>
+              <li>Mendokumentasikan kegiatan dalam bentuk foto, video, dan dokumen tertulis</li>
+              <li>Membuat buku monitoring/check list dari uraian tugas</li>
+              <li>Membuat jadwal kebersihan toilet berdasarkan daftar piket kelas</li>
+              <li>Membuat kapling area kebersihan melibatkan berbagai pihak</li>
+              <li>Melakukan aksi bersih-bersih sampah di pantai</li>
+              <li>Ikut membersihkan lingkungan sekitar sekolah</li>
+            </ul>
+          </div>
+          
+        <div id="pengelolaan" class="content">
+          <h2>PENGELOLAAN SAMPAH</h2>
+          <p class="description"> Langkah-langkah yang dilakukan:</p>
+          <ul>
+              <li>Menyediakan air minum isi ulang.</li>
+              <li>Melakukan kampanye tidak menggunakan plastik.</li>
+              <li>Membuat loker khusus untuk pengumpulan donasi barang-barang bekas dari warga sekolah.</li>
+              <li>Membuat jadwal piket pemindahan sampah ke TPA (Tempat Pembuangan Akhir).</li>
+              <li>Membuat SOP (Standar Operasional Prosedur) pemindahan sampah untuk pedoman peserta didik.</li>
+              <li>Menyediakan tempat sampah terpilah sesuai jenisnya dan memberi label.</li>
+              <li>Melaksanakan pengomposan yang melibatkan kader Adiwiyata.</li>
+              <li>Mengatur penyaluran kompos ke Pokja Penanaman dan Pemeliharaan Tanaman.</li>
+              <li>Memilah kemasan bekas produk untuk digunakan ulang, seperti:
+                <ul>
+                  <li>Botol plastik bekas untuk media tanam (hasil diserahkan ke Pokja Penanaman dan Pemeliharaan Tanaman).</li>
+                  <li>Cup plastik bekas minuman untuk tempat pensil (hasil diserahkan ke guru Prakarya).</li>
+                </ul>
+              </li>
+              <li>Mengirim sampah anorganik ke bank sampah agar didaur ulang.</li>
+              <li>Membuat buku pengumpulan sampah berisi data/catatan volume sampah organik dan anorganik, dihitung rata-rata per bulan, selama 1 tahun.</li>
+              <li>Mendokumentasikan semua kegiatan (dokumen tertulis, foto, video).</li>
+              <li>Melakukan kampanye tentang bank sampah dan pengelolaan sampah dengan prinsip 3R (Reuse, Reduce, Recycle).</li>
+              <li>Ikut memilah sampah dan menerapkan prinsip 3R untuk lingkungan sekitar sekolah.</li>
+            </ul>
+          </div>
+      
+        <div id="penghijauan" class="content">
+            <h2>PENANAMAN DAN PEMELIHARAAN POHON/TANAMAN</h2>
+            <p class="description">Langkah-langkah yang dilakukan:</p>
+            <ul>
+              <li>Membuat buku monitoring/check list berisi jenis tanaman, jumlah tanaman, dan kondisinya.</li>
+              <li>Mendokumentasikan kondisi tanaman yang ditanam serta proses pemeliharaan, penanaman, dan pembibitan.</li>
+              <li>Memberi nama pada tanaman (pelabelan).</li>
+              <li>Mengadakan lomba penghijauan kelas.</li>
+              <li>Mengikuti kegiatan penanaman di sekitar sekolah.</li>
+              <li>Membuat jadwal piket penanaman, pemeliharaan, dan pembibitan yang melibatkan berbagai pihak (guru, siswa, orang tua, dll).</li>
+              <li>Menanam tanaman seperti lidah buaya, buah, sayur, dan TOGA.</li>
+              <li>Melakukan pembibitan tanaman dengan media tanam dari kemasan bekas produk.</li>
+              <li>Memupuk tanaman menggunakan kompos hasil dari Pokja Pengelolaan Sampah.</li>
+              <li>Menulis manfaat/khasiat masing-masing tanaman TOGA.</li>
+              <li>Memilih jenis tanaman endemik yang tidak membahayakan bangunan atau warga sekolah (tidak berduri dan tidak beracun).</li>
+            </ul>
+          </div>
+      
+          <div id="konservasi" class="content">
+            <h2>KONSERVASI AIR</h2>
+            <ul class="description">
+              <li>Membuat lubang biopori</li>
+              <li>Membuat sumur resapan</li>
+              <li>Memelihara instalasi air</li>
+              <li>Mendokumentasikan semua kegiatan (foto, video, dokumen tertulis)</li>
+              <li>Melakukan kampanye tentang konservasi air</li>
+            </ul>
+          </div>
+          <div id="tanaman" class="content">
+            <h2>KONSERVASI ENERGI</h2>
+            <ul class="description">
+              <li>Membuat ketentuan/peraturan tentang pemanfaatan dan penggunaan energi listrik</li>
+              <li>Mengadakan kampanye energi, antara lain:
+                <ul>
+                  <li>Perawatan peralatan listrik</li>
+                  <li>Pemanfaatan sumber energi terbarukan</li>
+                  <li>Penggunaan bahan bakar ramah lingkungan</li>
+                  <li>Sehari tanpa kendaraan bermotor</li>
+                  <li>Mematikan dan mencabut saklar peralatan elektronik saat tidak digunakan</li>
+                  <li>Memanfaatkan cahaya alami (Matahari) pada siang hari</li>
+                  <li>Pengaturan suhu AC 24–26°C</li>
+                </ul>
+              </li>
+              <li>Mengadakan penelitian/penugasan/praktik pada mata pelajaran</li>
+              <li>Mengadakan penelitian/penugasan/praktik pada ekstrakurikuler</li>
+              <li>Mendokumentasikan semua kegiatan (foto, video, dokumen tertulis)</li>
+            </ul>
+          </div>
+          <div id="kompos" class="content">
+            <h2>INOVASI PENERAPAN PERILAKU RAMAH LINGKUNGAN</h2>
+            <ul class="description">
+              <li>Menyiapkan minimal 4 karya inovatif:
+                <ul>
+                  <li>Karya inovatif lidah buaya menjadi aneka makanan dan minuman</li>
+                  <li>Karya inovatif lidah buaya menjadi obat</li>
+                  <li>Karya inovatif lidah buaya menjadi sabun</li>
+                  <li>Karya inovatif lidah buaya menjadi handsanitizer</li>
+                </ul>
+              </li>
+              <li>Mendokumentasikan semua kegiatan (foto, video, dokumen tertulis)</li>
+              <li>Menyiapkan penghargaan karya inovatif yang diperoleh</li>
+              <li>Menyiapkan informasi detail dan penting terkait karya inovatif</li>
+            </ul>
+          </div>
+          <div id="reboisasi" class="content">
+            <h2>PEMBENTUKAN JEJARING KERJA dan KOMUNIKASI</h2>
+            <ul class="description">
+              <li>Membentuk jejaring kerja dan komunikasi menggunakan grup WA antar warga sekolah</li>
+              <li>Membentuk jejaring kerja dan komunikasi menggunakan grup WA atau dengan pertemuan rutin antar sekolah adiwiyata</li>
+              <li>Membentuk jejaring kerja dan komunikasi menggunakan MOU dengan instansi/pihak lain (DLH, Dinas Kehutanan, Pasar, Terminal)</li>
+              <li>Membentuk jejaring kerja dan komunikasi dengan pertemuan rutin, dengan komite sekolah</li>
+              <li>Mendokumentasikan semua kegiatan (foto, video, dokumen tertulis)</li>
+              <li>Menyiapkan tautan grup WA yang dipakai</li>
+            </ul>
+          </div>
+          <div id="penanaman" class="content">
+            <h2>PENERAPAN PERILAKU RAMAH LINGKUNGAN HIDUP (PRLH)</h2>
+            <ul class="description">
+              <li>Menjaga kebersihan, sanitasi, dan drainase</li>
+              <li>Memilah dan membuang sampah pada tempatnya</li>
+              <li>Mengelola sampah dengan 3R (Reuse, Reduce, Recycle)</li>
+              <li>Menanam dan memelihara pohon/tanaman</li>
+              <li>Konservasi air yaitu pengelolaan air bersih melalui teknologi atau perilaku sosial</li>
+              <li>Kenyamanan dan produktivitas</li>
+              <li>Konservasi energi yaitu tindakan mengurangi jumlah penggunaan energi tanpa mengurangi keamanan</li>
+              <li>Inovasi terkait penerapan PRLH lainnya</li>
+            </ul>
+          </div>
+          <div id="daur" class="content">
+            <h2>KEGIATAN KAMPANYE dan PUBLIKASI GPBLHS</h2>
+            <ul class="description">
+              <li>Melakukan internalisasi GPBLHS bagi warga sekolah</li>
+              <li>Sosialisasi GPBLHS bagi lembaga terkait melalui pemberitaan atau pameran</li>
+              <li>Melakukan kampanye konservasi air, bekerjasama dengan Pokja Konservasi Air dan Energi</li>
+              <li>Melakukan kampanye konservasi energi, bekerjasama dengan pokja konservasi air dan energi</li>
+              <li>Melakukan kampanye pengelolaan sampah melalui 3R, bekerjasama dengan pokja pengelolaan sampah</li>
+              <li>Mendokumentasikan semua kegiatan (foto, video, dokumen tertulis)</li>
+            </ul>
+          </div>
+          <div id="hijau" class="content">
+            <h2>KADER ADIWIYATA</h2>
+            <ul class="description">
+              <li>Mengikuti pelatihan Kader Adiwiyata</li>
+              <li>Mengikuti kegiatan pembuatan kompos dengan Pokja Pengelolaan Sampah</li>
+              <li>Mengikuti pembersihan saluran drainase bersama Pokja Kebersihan Fungsi Sanitasi dan Drainase</li>
+              <li>Mengikuti aksi bersih sampah bersama Pokja Kebersihan Fungsi Sanitasi dan Drainase</li>
+              <li>Mengikuti penanaman dan pemeliharaan tanaman bersama Pokja Penanaman dan Pemeliharaan tanaman</li>
+              <li>Mengikuti kampanye pengelolaan sampah bersama Pokja Pengelolaan Sampah</li>
+              <li>Mengikuti kampanye konservasi air dan energi bersama dengan Pokja Konservasi Air dan Energi</li>
+              <li>Mengkoordinir peserta didik untuk melaksanakan regu piket kelas, diantaranya:
+                <ul>
+                  <li>Membersihkan kelas</li>
+                  <li>Memelihara dan menanam tanaman</li>
+                  <li>Memindahkan sampah ke TPA</li>
+                  <li>Memilah sampah</li>
+                  <li>Mematuhi tata tertib sekolah</li>
+                  <li>Membersihkan toilet</li>
+                  <li>Mematuhi aturan penggunaan toilet</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+    </div>
+
+    <footer>
+        <div class="social-media">
+                <a href="https://www.instagram.com/sdnporispelawad6?igsh=NXExNnVwcHpuNWh3" class="social-link"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="https://youtube.com/@sdnpp6channel80?feature=shared" class="social-link"><i class="fab fa-youtube"></i> Youtube</a>
+            </div>
+        <p>&copy; 2024 SDN Poris Pelawad 06. All rights reserved.</p>
+    </footer>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('nav-links');
+            navLinks.classList.toggle('active');
+        }
+    
+        // JavaScript untuk memungkinkan geser horizontal pada carousel di mobile
+        const carousel = document.querySelector('.carousel');
+    
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+    
+        carousel.addEventListener('mousedown', (e) => {
+            isDown = true;
+            carousel.classList.add('active');
+            startX = e.pageX - carousel.offsetLeft;
+            scrollLeft = carousel.scrollLeft;
+        });
+    
+        carousel.addEventListener('mouseleave', () => {
+            isDown = false;
+            carousel.classList.remove('active');
+        });
+    
+        carousel.addEventListener('mouseup', () => {
+            isDown = false;
+            carousel.classList.remove('active');
+        });
+    
+        carousel.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - carousel.offsetLeft;
+            const walk = (x - startX) * 2; // Kecepatan scroll
+            carousel.scrollLeft = scrollLeft - walk;
+        });
+    
+        // Mendukung touch event untuk perangkat mobile
+        carousel.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].pageX - carousel.offsetLeft;
+            scrollLeft = carousel.scrollLeft;
+        });
+    
+        carousel.addEventListener('touchmove', (e) => {
+            const x = e.touches[0].pageX - carousel.offsetLeft;
+            const walk = (x - startX) * 2; // Kecepatan scroll
+            carousel.scrollLeft = scrollLeft - walk;
+        });
+        // JavaScript to show content based on selection
+    function showContent(contentId) {
+      const contents = document.querySelectorAll('.content');
+      contents.forEach(content => content.classList.remove('active'));
+      document.getElementById(contentId).classList.add('active');
+    }
+    function showContent(id) {
+  // Sembunyikan semua konten
+  const allContent = document.querySelectorAll(".content");
+  allContent.forEach(content => {
+    content.style.display = "none"; // Semua konten disembunyikan
+  });
+
+  // Tampilkan konten yang dipilih
+  const selectedContent = document.getElementById(id);
+  if (selectedContent) {
+    selectedContent.style.display = "block"; // Tampilkan konten terpilih
+  }
+}
+
+
+
+    </script>
+    
+</body>
+</html>

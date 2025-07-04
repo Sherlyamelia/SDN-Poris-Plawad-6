@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDN Poris Pelawad 6</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/prestasi-guru.css">
+</head>
+
+<body>
+<header>
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="/img/Logo.png" alt="Logo SDN Poris Pelawad 6" class="logo-img">
+                <span class="logo-text">SDN PORIS PELAWAD 6</span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a th:href="@{/}">Beranda</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Profil</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/profil/visi-misi}">Visi & Misi</a>
+                        <a th:href="@{/profil/guru-tendik}">Guru & Tendik</a>
+                        <a th:href="@{/profil/sarana-prasarana}">Sarana & Prasana</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Kesiswaan</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/kesiswaan/tata-tertib}">Tata Tertib</a>
+                        <a th:href="@{/kesiswaan/ekstrakurikuler}">Ekstrakurikuler</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Adiwiyata</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/adiwiyata/ipmlh}">IPMLH</a>
+                        <a th:href="@{/adiwiyata/visi-misi-adiwiyata}">Visi & Misi Adiwiyata</a>
+                        <a th:href="@{/adiwiyata/struktur-adiwiyata}">Struktur Adiwiyata</a>
+                        <a th:href="@{/adiwiyata/program-adiwiyata}">Program Adiwiyata</a>
+                        <a th:href="@{/adiwiyata/dokumentasi-adiwiyata}">Dokumentasi</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Prestasi</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/prestasi/prestasi-sekolah}">Prestasi Sekolah</a>
+                        <a th:href="@{/prestasi/prestasi-guru}">Prestasi Guru</a>
+                        <a th:href="@{/prestasi/prestasi-murid}">Prestasi Murid</a>
+                        <a th:href="@{/prestasi/prestasi-kelas}">Prestasi Kelas</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Informasi</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/informasi/ppdb}">PPDB</a>
+                        <a th:href="@{/informasi/berita}">Berita</a>
+                        <a th:href="@{/informasi/perpustakaan}">Perpustakaan</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+</header>
+
+    <section class="hero">
+        <h1></h1>
+        <p></p>
+    </section>
+
+    <main>
+        <section class="section">
+            <h2>Adapun Beberapa Prestasi yang di raih oleh Guru SDN Poris Pelawad 6 </h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Jenis Prestasi</th>
+                            <th>Tahun</th>
+                            <th>Peringkat</th>
+                            <th>Tingkat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="prestasi, iterStat : ${daftarPrestasi}">
+                        <td th:text="${iterStat.index + 1}">1</td>
+                        <td th:text="${prestasi.namaGuru}">Sherly Amelia</td>
+                        <td th:text="${prestasi.jenisPrestasi}">Guru Teladan</td>
+                        <td th:text="${prestasi.tahun}">2023</td>
+                        <td th:text="${prestasi.peringkat}">1</td>
+                        <td th:text="${prestasi.tingkat}">Kota</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+        </section>
+    </main>
+    <div class="divider-line"></div>
+    <!-- Bagian Galeri Kegiatan -->
+    <section class="section">
+        <h2>Dokumentasi Prestasi Guru</h2>
+        <div class="grid-container">
+            <div class="card" th:each="prestasi : ${daftarPrestasi}">
+                <img th:src="@{'/img/prestasi-guru/' + ${prestasi.foto}}" alt="Dokumentasi">
+                <div class="card-title" th:text="${prestasi.jenisPrestasi}">Jenis Prestasi</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-media">
+                <a href="https://www.instagram.com/sdnporispelawad6?igsh=NXExNnVwcHpuNWh3" class="social-link"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="https://youtube.com/@sdnpp6channel80?feature=shared" class="social-link"><i class="fab fa-youtube"></i> Youtube</a>
+            </div>
+        <p>&copy; 2024 SDN Poris Pelawad 06. All rights reserved.</p>
+    </footer>
+    <script>
+    let currentImageIndex = 0;
+    const images =  // Tambahkan path gambar lainnya
+
+    // Function untuk mengganti background
+    function changeBackground() {
+        document.querySelector(".hero").style.backgroundImage = `url(${images[currentImageIndex]})`;
+        currentImageIndex = (currentImageIndex + 1) % images.length; // Loop kembali ke gambar pertama
+    }
+
+    // Set interval untuk pergantian background (misal, 5 detik)
+    setInterval(changeBackground, 4000);
+
+    // Hamburger menu toggle
+    function toggleMenu() {
+        const navLinks = document.getElementById("nav-links");
+        navLinks.classList.toggle("active");
+    }
+</script>
+</body>
+</html>

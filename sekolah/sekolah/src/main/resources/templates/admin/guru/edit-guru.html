@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Edit Data Guru</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" th:href="@{/css/edit-guru.css}" />
+</head>
+
+<body>
+<!-- Navbar -->
+<div class="navbar">
+    <span class="menu-icon" onclick="toggleSidebar()">☰</span>
+    <div class="right-section">
+        <i class="fa fa-user"></i>
+        <h1>Admin Sekolah</h1>
+    </div>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <div class="admin-profile">
+        <img src="/img/Logo.png" alt="Profil Admin" class="admin-image">
+        <p class="admin-name">ADMIN WEBSITE</p>
+    </div>
+    <ul class="menu-list">
+        <li><a th:href="@{/admin/admin-panel}"><i class="fas fa-home"></i> Dashboard</a></li>
+        <li><a th:href="@{/admin/guru/data-guru}" class="active"><i class="fas fa-chalkboard-teacher"></i> Data Guru</a></li>
+        <li class="has-submenu">
+            <a href="#" onclick="toggleSubmenu(event)">
+                <span><i class="fas fa-trophy"></i> Data Prestasi</span>
+                <i class="fas fa-chevron-left submenu-toggle"></i>
+            </a>
+            <ul class="submenu">
+                <li><a th:href="@{/admin/prestasi/dapres-guru}">Prestasi Guru</a></li>
+                <li><a th:href="@{/admin/prestasi/dapres-siswa}">Prestasi Siswa</a></li>
+                <li><a th:href="@{/admin/prestasi/dapres-sekolah}">Prestasi Sekolah</a></li>
+                <li><a th:href="@{/admin/prestasi/dapres-kelas}">Prestasi Kelas</a></li>
+            </ul>
+        </li>
+        <li><a th:href="@{/admin/eskul/data-eskul}"><i class="fas fa-futbol"></i> Ekstrakurikuler</a></li>
+        <li><a th:href="@{/admin/berita/data-berita}"><i class="fas fa-newspaper"></i> Berita</a></li>
+        <li><a href="#" onclick="confirmLogout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+</div>
+
+<div class="container">
+    <h2>EDIT DATA GURU</h2>
+
+    <form th:action="@{/admin/guru/save}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" th:value="${guru.id}" />
+
+        <div class="form-group">
+            <label for="nama">Nama</label>
+            <input type="text" id="nama" name="nama" placeholder="Nama" th:value="${guru.nama}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="pendidikan">Pendidikan</label>
+            <input type="text" id="pendidikan" name="pendidikan" placeholder="Pendidikan" th:value="${guru.pendidikan}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="nip">NIP</label>
+            <input type="text" id="nip" name="nip" placeholder="NIP" th:value="${guru.nip}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="ttl">Tempat, Tanggal Lahir</label>
+            <input type="text" id="ttl" name="ttl" placeholder="Tempat, Tanggal Lahir" th:value="${guru.ttl}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="jenisKelamin">Jenis Kelamin</label>
+            <input type="text" id="jenisKelamin" name="jenisKelamin" placeholder="Jenis Kelamin" th:value="${guru.jenisKelamin}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="agama">Agama</label>
+            <input type="text" id="agama" name="agama" placeholder="Agama" th:value="${guru.agama}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="pangkat">Pangkat/Gol</label>
+            <input type="text" id="pangkat" name="pangkat" placeholder="Pangkat/Gol" th:value="${guru.pangkat}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="posisi">Posisi</label>
+            <input type="text" id="posisi" name="posisi" placeholder="Posisi" th:value="${guru.posisi}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="status">Status</label>
+            <input type="text" id="status" name="status" placeholder="Status" th:value="${guru.status}" required/>
+        </div>
+
+        <div class="form-group">
+            <label>Foto Saat Ini</label>
+            <img th:src="@{/img/guru/{fileName}(fileName=${guru.foto})}" alt="Foto Guru"  width="200">
+            <input type="hidden" name="fotoLama" th:value="${guru.foto}">
+        </div>
+
+        <div class="form-group">
+            <label>Ganti Foto (Opsional)</label>
+            <input type="file" name="foto" />
+        </div>
+
+        <div class="btn-container">
+            <a href="/admin/guru/data-guru" class="btn-batal">BATAL</a>
+            <button type="submit" class="btn-simpan">SIMPAN</button>
+        </div>
+    </form>
+</div>
+
+
+<script>
+    function closeContainer() {
+       window.location.href = '/admin/guru/data-guru';
+   }
+
+   function toggleSubmenu(event) {
+     event.preventDefault();
+     let submenuContainer = event.target.closest(".has-submenu");
+     let submenu = submenuContainer.querySelector(".submenu");
+     let icon = submenuContainer.querySelector(".submenu-toggle");
+     let isOpen = submenu.style.display === "block";
+
+     document.querySelectorAll(".submenu").forEach(s => s.style.display = "none");
+     document.querySelectorAll(".submenu-toggle").forEach(i => i.style.transform = "rotate(0deg)");
+     document.querySelectorAll(".has-submenu").forEach(hs => hs.classList.remove("submenu-open"));
+
+     if (!isOpen) {
+       submenu.style.display = "block";
+       icon.style.transform = "rotate(90deg)";
+       submenuContainer.classList.add("submenu-open");
+     }
+   }
+
+   function toggleSidebar() {
+     const sidebar = document.getElementById("sidebar");
+     const content = document.getElementById("content");
+     sidebar.classList.toggle("sidebar-hidden");
+     if(content) content.classList.toggle("sidebar-collapsed");
+   }
+
+    function confirmLogout() {
+      Swal.fire({
+        title: 'Yakin ingin logout?',
+        text: "Kamu akan keluar dari sistem.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Ya, logout',
+        cancelButtonText: 'Batal'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = "/login";
+        }
+      });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pengunjung - Perpustakaan SDN Poris Pelawad 6</title>
+
+  <!-- Eksternal Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- File CSS terpisah -->
+  <link rel="stylesheet" th:href="@{/css/data-pengunjung.css}" />
+</head>
+
+<body>
+
+<div class="navbar">
+  <span class="menu-icon" onclick="toggleSidebar()">☰</span>
+  <div class="right-section">
+    <i class="fa fa-user"></i>
+    <h1>ADMIN PERPUSTAKAAN</h1>
+  </div>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <ul class="menu-list">
+    <div class="admin-profile">
+      <img src="https://i.pravatar.cc/80?img=12" alt="Profil Admin" class="admin-image">
+      <p class="admin-name">ANISA AMELIA</p>
+    </div>
+    <ul class="nav">
+      <li><a th:href="@{/admin-perpustakaan/perpus-panel}" class="nav-link"><i class="fas fa-home"></i> Beranda</a></li>
+      <li><a th:href="@{/admin-perpustakaan/data-buku}" class="nav-link"><i class="fas fa-book"></i> Buku</a></li>
+      <li><a th:href="@{/admin-perpustakaan/data-pengunjung}" class="nav-link"><i class="fas fa-users"></i> Pengunjung</a></li> <!-- Tambahan -->
+      <li><a th:href="@{/admin-perpustakaan/data-peminjaman}" class="nav-link"><i class="fas fa-user-check"></i> Peminjam</a></li>
+      <li><a th:href="@{/admin-perpustakaan/data-pengembalian}" class="nav-link"><i class="fas fa-undo-alt"></i> Pengembalian</a></li>
+      <li><a th:href="@{/admin-perpustakaan/laporan}" class="nav-link"><i class="fas fa-exchange-alt"></i> Laporan</a></li>
+      <li><a href="#" onclick="confirmLogout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+  </ul>
+</div>
+
+<div class="main-content" id="content">
+  <h1>Data Pengunjung Perpustakaan</h1>
+
+  <!-- Baris pertama: Search -->
+  <div class="search-row">
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Cari nama Pengunjung">
+      <i class="fas fa-search search-icon"></i>
+    </div>
+  </div>
+
+  <!-- Baris kedua: Filter + Download kiri, Tambah Pengunjung kanan -->
+  <div class="action-row">
+    <div class="filter-container">
+      <label for="NamaFilter">Filter Hari Pengunjung:</label>
+      <select id="NamaFilter">
+        <option value="">Semua</option>
+        <option value="Senin">Senin</option>
+        <option value="Selasa">Selasa</option>
+        <option value="Rabu">Rabu</option>
+        <option value="Kamis">Kamis</option>
+        <option value="Jumat">Jumat</option>
+        <option value="Sabtu">Sabtu</option>
+        <option value="Minggu">Minggu</option>
+      </select>
+
+      <!-- Tombol ikon download -->
+      <button onclick="downloadTable()" class="icon-button" title="Download CSV">
+        <i class="fas fa-download"></i>
+      </button>
+    </div>
+
+    <div class="button-container">
+      <a class="back-btn" th:href="@{/admin-perpustakaan/tambah-pengunjung}">+ Tambah Pengunjung</a>
+    </div>
+  </div>
+
+  <table id="tabelPengunjung">
+    <thead>
+    <tr>
+      <th>No</th>
+      <th>Nama</th>
+      <th>Jumlah Pengunjung</th>
+      <th>Hari</th>
+      <th>Tanggal</th>
+      <th>Keperluan</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pengunjung, iterStat : ${pengunjungList}">
+      <td th:text="${iterStat.index + 1}"></td>
+      <td th:text="${pengunjung.nama}"></td>
+      <td th:text="${pengunjung.jumlah}"></td>
+      <td th:text="${pengunjung.hari}"></td>
+      <td th:text="${pengunjung.tanggal}"></td>
+      <td th:text="${pengunjung.keperluan}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<script>
+  // Toggle Sidebar
+  function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    const content = document.getElementById("content");
+
+    sidebar.classList.toggle("sidebar-hidden");
+    content.classList.toggle("sidebar-collapsed");
+  }
+
+  // Filter Tabel Pengunjung (Nama + Hari)
+  function filterTable() {
+    const searchInput = document.getElementById("searchInput").value.toLowerCase();
+    const selectedHari = document.getElementById("NamaFilter").value;
+    const table = document.getElementById("tabelPengunjung");
+    const rows = table.getElementsByTagName("tr");
+
+    for (let i = 1; i < rows.length; i++) {
+      const namaTd = rows[i].getElementsByTagName("td")[1]; // Kolom Nama
+      const hariTd = rows[i].getElementsByTagName("td")[3]; // Kolom Hari
+
+      if (namaTd && hariTd) {
+        const namaText = namaTd.textContent.toLowerCase();
+        const hariText = hariTd.textContent.trim();
+
+        const matchesSearch = namaText.includes(searchInput);
+        const matchesHari = selectedHari === "" || hariText === selectedHari;
+
+        rows[i].style.display = (matchesSearch && matchesHari) ? "" : "none";
+      }
+    }
+  }
+
+  // Event Listener untuk Filter Otomatis (Nama + Hari)
+  document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("searchInput").addEventListener("keyup", filterTable);
+    document.getElementById("NamaFilter").addEventListener("change", filterTable);
+
+    // Tampilkan popup jika query string sukses=1 ada
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("sukses") === "1") {
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: 'Data pengunjung berhasil disimpan.',
+        confirmButtonColor: '#3085d6'
+      });
+    }
+  });
+
+  // Download Data Tabel sebagai CSV
+  function downloadTable() {
+    const table = document.getElementById("tabelPengunjung");
+    const rows = Array.from(table.rows);
+
+    const csv = rows.map(row =>
+      Array.from(row.cells).map(cell => `"${cell.innerText}"`).join(",")
+    ).join("\n");
+
+    const blob = new Blob([csv], { type: "text/csv" });
+    const link = document.createElement("a");
+
+    link.href = URL.createObjectURL(blob);
+    link.download = "data_pengunjung.csv";
+    link.click();
+  }
+
+  // Fungsi Hapus Baris (tidak digunakan saat ini)
+  function deleteRow(button) {
+    const row = button.closest("tr");
+    row.remove();
+  }
+
+  // Konfirmasi Logout
+  function confirmLogout() {
+    Swal.fire({
+      title: 'Yakin ingin Logout?',
+      text: "Anda akan keluar dari sistem.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ya, Logout!',
+      cancelButtonText: 'Batal'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "/login";
+      }
+    });
+  }
+
+  // Inisialisasi saat Halaman Selesai Dimuat
+  window.onload = function () {
+    // Inisialisasi filter saat halaman dimuat, jika perlu
+    filterTable();
+  };
+</script>
+</body>
+</html>

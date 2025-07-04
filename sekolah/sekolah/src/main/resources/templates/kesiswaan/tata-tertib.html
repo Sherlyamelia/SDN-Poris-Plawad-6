@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDN Poris Pelawad 6</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/tata-tertib.css">
+</head>
+
+<body>
+<header>
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="/img/Logo.png" alt="Logo SDN Poris Pelawad 6" class="logo-img">
+                <span class="logo-text">SDN PORIS PELAWAD 6</span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a th:href="@{/}">Beranda</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Profil</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/profil/visi-misi}">Visi & Misi</a>
+                        <a th:href="@{/profil/guru-tendik}">Guru & Tendik</a>
+                        <a th:href="@{/profil/sarana-prasarana}">Sarana & Prasana</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Kesiswaan</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/kesiswaan/tata-tertib}">Tata Tertib</a>
+                        <a th:href="@{/kesiswaan/ekstrakurikuler}">Ekstrakurikuler</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Adiwiyata</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/adiwiyata/ipmlh}">IPMLH</a>
+                        <a th:href="@{/adiwiyata/visi-misi-adiwiyata}">Visi & Misi Adiwiyata</a>
+                        <a th:href="@{/adiwiyata/struktur-adiwiyata}">Struktur Adiwiyata</a>
+                        <a th:href="@{/adiwiyata/program-adiwiyata}">Program Adiwiyata</a>
+                        <a th:href="@{/adiwiyata/dokumentasi-adiwiyata}">Dokumentasi</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Prestasi</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/prestasi/prestasi-sekolah}">Prestasi Sekolah</a>
+                        <a th:href="@{/prestasi/prestasi-guru}">Prestasi Guru</a>
+                        <a th:href="@{/prestasi/prestasi-murid}">Prestasi Murid</a>
+                        <a th:href="@{/prestasi/prestasi-kelas}">Prestasi Kelas</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Informasi</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/informasi/ppdb}">PPDB</a>
+                        <a th:href="@{/informasi/berita}">Berita</a>
+                        <a th:href="@{/informasi/perpustakaan}">Perpustakaan</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+</header>
+
+    <section class="hero">
+        <h2></h2>
+    </section>
+
+    <div class="container">
+        <div class="title-section">
+            <h2>TATA TERTIB BERPAKAIAN</h2>
+        </div>
+        <ul class="rules">
+            <li><span>1. Seragam Sekolah</span><br>
+                Siswa wajib mengenakan seragam sekolah sesuai ketentuan hari yang telah ditetapkan.</li>
+            <li><span>2. Kerapihan dan Kebersihan</span><br>
+                Siswa diharuskan menjaga kerapihan pakaian, dengan baju dimasukkan dan sepatu hitam yang bersih.</li>
+            <li><span>3. Aksesoris</span><br>
+                Siswa dilarang mengenakan aksesoris berlebihan yang tidak sesuai dengan seragam sekolah.</li>
+            <li><span>4. Rambut dan Penampilan</span><br>
+                Rambut harus rapi; bagi siswa laki-laki tidak boleh terlalu panjang, dan siswa perempuan harus merapikan rambut sesuai aturan sekolah.</li>
+        </ul>
+
+        <div class="image-grid" id="imageGrid">
+            <div>
+                <img src="/img/PUTIH HITAM.png" alt="Image Senin" id="slideshowImage">
+                <div class="day-label" id="dayLabel">PUTIH HITAM</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+            <div class="social-media">
+                <a href="https://www.instagram.com/sdnporispelawad6?igsh=NXExNnVwcHpuNWh3" class="social-link"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="https://youtube.com/@sdnpp6channel80?feature=shared" class="social-link"><i class="fab fa-youtube"></i> Youtube</a>
+            </div>
+            <p>&copy; 2024 SDN Poris Pelawad 06. All rights reserved.</p>
+        </footer>
+
+    <script>
+        let currentImageIndex = 0;
+    const images = ["/img/tatatertibb.png", "/img/tatatertibbb.png",]; // Tambahkan path gambar lainnya
+
+    // Function untuk mengganti background
+    function changeBackground() {
+        document.querySelector(".hero").style.backgroundImage = `url(${images[currentImageIndex]})`;
+        currentImageIndex = (currentImageIndex + 1) % images.length; // Loop kembali ke gambar pertama
+    }
+
+    // Set interval untuk pergantian background (misal, 5 detik)
+    setInterval(changeBackground, 4000);
+
+        // Gambar dan hari-hari untuk slideshow
+        const slides = [
+            { src: '/img/MERAH PUTIH.png', day: 'PUTIH MERAH' },
+            { src: '/img/PUTIH HITAM.png', day: 'PUTIH HITAM' }
+        ];
+        
+        let currentSlide = 0; // Indeks slide yang sedang ditampilkan
+
+        function showSlide(index) {
+            const slideshowImage = document.getElementById('slideshowImage');
+            const dayLabel = document.getElementById('dayLabel');
+            
+            // Ubah sumber gambar dan teks hari
+            slideshowImage.src = slides[index].src;
+            dayLabel.textContent = slides[index].day;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length; // Pindah ke slide berikutnya
+            showSlide(currentSlide);
+        }
+
+        // Mulai slideshow otomatis setiap 3 detik
+        setInterval(nextSlide, 3000);
+
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

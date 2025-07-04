@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Prestasi Siswa</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" th:href="@{/css/create-sipres.css}" />
+</head>
+<body>
+<!-- Navbar -->
+<div class="navbar">
+  <span class="menu-icon" onclick="toggleSidebar()">☰</span>
+  <div class="right-section">
+    <i class="fa fa-user"></i>
+    <h1>Admin Sekolah</h1>
+  </div>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="admin-profile">
+    <img src="/img/Logo.png" alt="Profil Admin" class="admin-image">
+    <p class="admin-name">ADMIN WEBSITE</p>
+  </div>
+  <ul class="menu-list">
+    <li><a th:href="@{/admin/admin-panel}"><i class="fas fa-home"></i> Dashboard</a></li>
+    <li><a th:href="@{/admin/guru/data-guru}"><i class="fas fa-chalkboard-teacher"></i> Data Guru</a></li>
+    <li class="has-submenu">
+      <a href="#" onclick="toggleSubmenu(event)">
+        <span><i class="fas fa-trophy"></i> Data Prestasi</span>
+        <i class="fas fa-chevron-left submenu-toggle"></i>
+      </a>
+      <ul class="submenu">
+        <li><a th:href="@{/admin/prestasi/dapres-guru}">Prestasi Guru</a></li>
+        <li><a th:href="@{/admin/prestasi/dapres-siswa}">Prestasi Siswa</a></li>
+        <li><a th:href="@{/admin/prestasi/dapres-sekolah}">Prestasi Sekolah</a></li>
+        <li><a th:href="@{/admin/prestasi/dapres-kelas}">Prestasi Kelas</a></li>
+      </ul>
+    </li>
+    <li><a th:href="@{/admin/eskul/data-eskul}"><i class="fas fa-futbol"></i> Ekstrakurikuler</a></li>
+    <li><a th:href="@{/admin/berita/data-berita}"><i class="fas fa-newspaper"></i> Berita</a></li>
+    <li><a href="#" onclick="confirmLogout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+  </ul>
+</div>
+
+  <div class="container">
+    <h2>CREATE PRESTASI SISWA</h2>
+
+    <form th:action="@{/admin/prestasi/siswa/simpan}" method="post" enctype="multipart/form-data" th:object="${prestasiSiswa}">
+
+      <div class="form-group">
+      <label for="namaSiswa">Nama Siswa</label>
+      <input type="text" id="namaSiswa" th:field="*{namaSiswa}" placeholder="Nama Siswa" />
+      </div>
+
+      <div class="form-group">
+      <label for="Prestasi">Prestasi</label>
+      <input type="text" id="Prestasi" th:field="*{Prestasi}" placeholder="Prestasi" />
+      </div>
+
+      <div class="form-group">
+      <label for="peringkat">Peringkat</label>
+      <input type="number" id="peringkat" th:field="*{peringkat}" placeholder="Peringkat" />
+      </div>
+
+      <div class="form-group">
+      <label for="tingkat">Tingkat</label>
+      <input type="text" id="tingkat" th:field="*{tingkat}" placeholder="Tingkat" />
+      </div>
+
+      <div class="form-group">
+      <label for="tahun">Tahun</label>
+      <input type="text" id="tahun" th:field="*{tahun}" placeholder="Tahun" />
+      </div>
+
+      <div class="form-group">
+      <label for="deskripsi">Deskripsi</label>
+      <textarea type="text" id="deskripsi" th:field="*{deskripsi}" placeholder="Deskripsi" /></textarea>
+      </div>
+
+      <div class="form-group">
+      <label for="foto">Upload Foto</label>
+      <input type="file" id="foto" name="file" accept="image/*">
+      </div>
+
+      <div class="btn-container">
+        <a href="/admin/prestasi/siswa/dapres-siswa" class="btn-batal">BATAL</a>
+        <button type="submit" class="btn-simpan">SIMPAN</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function toggleSubmenu(event) {
+      event.preventDefault();
+      let submenuContainer = event.target.closest(".has-submenu");
+      let submenu = submenuContainer.querySelector(".submenu");
+      let icon = submenuContainer.querySelector(".submenu-toggle");
+      let isOpen = submenu.style.display === "block";
+
+      document.querySelectorAll(".submenu").forEach(s => s.style.display = "none");
+      document.querySelectorAll(".submenu-toggle").forEach(i => i.style.transform = "rotate(0deg)");
+      document.querySelectorAll(".has-submenu").forEach(hs => hs.classList.remove("submenu-open"));
+
+      if (!isOpen) {
+        submenu.style.display = "block";
+        icon.style.transform = "rotate(90deg)";
+        submenuContainer.classList.add("submenu-open");
+      }
+    }
+
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("sidebar-hidden");
+    }
+    function confirmLogout() {
+      Swal.fire({
+        title: 'Yakin ingin logout?',
+        text: "Kamu akan keluar dari sistem.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Ya, logout',
+        cancelButtonText: 'Batal'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = "/login";
+        }
+      });
+    }
+
+  </script>
+</body>
+</html>

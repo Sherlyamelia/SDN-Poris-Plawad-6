@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dashboard Admin - Perpustakaan SDN Poris Pelawad 6</title>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <!-- Library eksternal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Font dan CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/perpus-style.css}" />
+</head>
+<body>
+<div class="navbar">
+    <span class="menu-icon" onclick="toggleSidebar()">☰</span>
+    <div class="right-section">
+        <i class="fa fa-user"></i>
+        <h1>ADMIN PERPUSTAKAAN</h1>
+    </div>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <ul class="menu-list">
+        <div class="admin-profile">
+            <img src="/img/Logo.png" alt="Profil Admin" class="admin-image">
+            <p class="admin-name">ADMIN PERPUSTAKAAN</p>
+        </div>
+        <ul class="nav">
+            <li><a th:href="@{/admin-perpustakaan/perpus-panel}" class="nav-link"><i class="fas fa-home"></i> Beranda</a></li>
+            <li><a th:href="@{/admin-perpustakaan/data-buku}" class="nav-link"><i class="fas fa-book"></i> Buku</a></li>
+            <li><a th:href="@{/admin-perpustakaan/data-pengunjung}" class="nav-link"><i class="fas fa-users"></i> Pengunjung</a></li> <!-- Tambahan -->
+            <li><a th:href="@{/admin-perpustakaan/data-peminjaman}" class="nav-link"><i class="fas fa-user-check"></i> Peminjam</a></li>
+            <li><a th:href="@{/admin-perpustakaan/data-pengembalian}" class="nav-link"><i class="fas fa-undo-alt"></i> Pengembalian</a></li>
+            <li><a th:href="@{/admin-perpustakaan/laporan}" class="nav-link"><i class="fas fa-exchange-alt"></i> Laporan</a></li>
+            <li><a href="#" onclick="confirmLogout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </ul>
+</div>
+
+<!-- Main Content -->
+<main class="main-content" id="content">
+    <h2 class="page-title">Beranda</h2>
+
+    <section class="cards">
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/29/29302.png" alt="Buku">
+            <p>BUKU<br><strong th:text="${jumlahBuku}">0</strong></p>
+        </div>
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/65/65000.png" alt="Peminjam">
+            <p>PEMINJAM<br><strong th:text="${jumlahPeminjam}">0</strong></p>
+        </div>
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/2892/2892920.png" alt="Pengembali">
+            <p>PENGEMBALI<br><strong th:text="${jumlahPengembali}">0</strong></p>
+        </div>
+        <!-- ✅ Tambahan kartu -->
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/1010/1010420.png" alt="Bulan Ini">
+            <p>BULAN INI<br><strong th:text="${jumlahPeminjamanBulanIni}">0</strong></p>
+        </div>
+    </section>
+
+    <section class="charts-grid">
+        <div>
+            <h4>Jumlah Peminjaman Bulan Ini</h4>
+            <canvas id="barChart" height="200"></canvas>
+        </div>
+        <div>
+            <h4>Jumlah Buku per Kategori</h4>
+            <canvas id="kategoriChart" height="200"></canvas>
+        </div>
+        <div>
+            <h4>Peminjaman per Bulan</h4>
+            <canvas id="pinjamPerBulanChart" height="200"></canvas>
+        </div>
+        <div>
+            <h4>Tren Peminjaman Buku</h4>
+            <canvas id="trenChart" height="200"></canvas>
+        </div>
+        <div>
+            <h4>Status Buku</h4>
+            <canvas id="statusChart" height="200"></canvas>
+        </div>
+        <div>
+            <h4>Top 5 Buku Terpopuler</h4>
+            <canvas id="topBooksChart" height="200"></canvas>
+        </div>
+    </section>
+
+    <section class="table-section">
+        <h4>Peminjaman Terbaru</h4>
+        <table id="guruTable" class="styled-table">
+            <thead>
+            <tr>
+                <th>NO</th>
+                <th>Nama Peminjam</th>
+                <th>Nama Buku</th>
+                <th>Tgl Pinjam</th>
+                <th>Tgl Pengembalian</th>
+                <th>Aksi</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${#lists.isEmpty(daftarPeminjaman)}">
+                <td colspan="6" style="text-align: center;">Belum ada data peminjaman.</td>
+            </tr>
+            <tr th:each="peminjaman, stat : ${daftarPeminjaman}">
+                <td th:text="${stat.index + 1}">1</td>
+                <td th:text="${peminjaman.namaPeminjam}">Nama</td>
+                <td th:text="${peminjaman.buku != null ? peminjaman.buku.namaBuku : 'Tidak Diketahui'}">Buku</td>
+                <td th:text="${peminjaman.tglPinjam}">2024-01-01</td>
+                <td th:text="${peminjaman.tglKembali}">2024-01-10</td>
+                <td>
+                    <input type="checkbox"
+                           onchange="selesaikanPengembalian(this)"
+                           th:attr="data-id=${peminjaman.id},
+                            data-nama=${peminjaman.namaPeminjam},
+                            data-buku=${peminjaman.buku != null ? peminjaman.buku.namaBuku : 'Tidak Diketahui'},
+                            data-bukuid=${peminjaman.buku != null ? peminjaman.buku.id : 0},
+                            data-pinjam=${peminjaman.tglPinjam},
+                            data-kembali=${peminjaman.tglKembali}">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+    <div th:if="${success}">
+        <script th:inline="javascript">
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: [[${success}]]
+            });
+        </script>
+    </div>
+</main>
+
+<script>
+    // Toggle sidebar visibility
+    function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const content = document.getElementById("content");
+        sidebar.classList.toggle("sidebar-hidden");
+        content.classList.toggle("full");
+    }
+
+    // Konfirmasi sebelum logout
+    function confirmLogout() {
+        Swal.fire({
+            title: 'Yakin ingin Logout?',
+            text: "Anda akan keluar dari sistem.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Logout!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/login";
+            }
+        });
+    }
+
+    // Update nomor urut pada tabel guru
+    function updateNomorUrut() {
+        const rows = document.querySelectorAll('#guruTable tbody tr');
+        rows.forEach((row, index) => {
+            if (row.cells[0]) {
+                row.cells[0].textContent = index + 1;
+            }
+        });
+    }
+
+    // Menyelesaikan proses pengembalian buku
+    function selesaikanPengembalian(checkbox) {
+        if (!checkbox.checked) return;
+
+        const row = checkbox.closest("tr");
+        const id = checkbox.getAttribute('data-id');
+        const namaPeminjam = checkbox.getAttribute('data-nama');
+        const namaBuku = checkbox.getAttribute('data-buku');
+        const bukuId = checkbox.getAttribute('data-bukuid');
+        const tglPinjam = checkbox.getAttribute('data-pinjam');
+        const tglKembali = checkbox.getAttribute('data-kembali');
+        const tglPengembalian = new Date().toISOString().split('T')[0];
+
+        const token = document.querySelector('meta[name="_csrf"]')?.getAttribute('content') || '';
+        const header = document.querySelector('meta[name="_csrf_header"]')?.getAttribute('content') || '';
+
+        const body = `namaPeminjam=${encodeURIComponent(namaPeminjam)}&` +
+                     `namaBuku=${encodeURIComponent(namaBuku)}&` +
+                     `bukuId=${encodeURIComponent(bukuId)}&` +
+                     `tglPinjam=${encodeURIComponent(tglPinjam)}&` +
+                     `tglKembali=${encodeURIComponent(tglKembali)}&` +
+                     `tglPengembalian=${encodeURIComponent(tglPengembalian)}`;
+
+        fetch('/admin-perpustakaan/simpan-pengembalian', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                ...(token && header ? { [header]: token } : {})
+            },
+            body: body
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Gagal menyimpan pengembalian!');
+            row.remove();
+            updateNomorUrut();
+
+            return fetch(`/admin-perpustakaan/hapus/${id}`, {
+                method: 'POST',
+                headers: token && header ? { [header]: token } : {}
+            });
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Gagal menghapus data peminjaman!');
+            Swal.fire({
+                title: 'Berhasil!',
+                text: 'Data pengembalian berhasil disimpan.',
+                icon: 'success',
+                confirmButtonText: 'Lihat Data Pengembalian'
+            }).then(() => {
+                window.location.href = '/admin-perpustakaan/data-pengembalian';
+            });
+        })
+        .catch(error => {
+            Swal.fire({
+                title: 'Oops!',
+                text: error.message || 'Terjadi kesalahan.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            checkbox.checked = false;
+        });
+    }
+
+    // Setelah DOM dimuat
+    window.addEventListener('DOMContentLoaded', function () {
+        updateNomorUrut();
+
+        // Fungsi umum untuk mengambil dan menampilkan chart
+        function loadChart(endpoint, elementId, chartConfigCallback) {
+            fetch(endpoint)
+                .then(res => res.json())
+                .then(data => {
+                    const ctx = document.getElementById(elementId).getContext('2d');
+                    new Chart(ctx, chartConfigCallback(data));
+                })
+                .catch(err => {
+                    console.error(`Gagal memuat data dari ${endpoint}:`, err);
+                });
+        }
+
+        // Opsi default untuk semua chart
+        const defaultOptions = {
+            responsive: true,
+            plugins: {
+                legend: {
+                    labels: {
+                        font: { family: 'Poppins', size: 14 },
+                        color: '#333'
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: '#555',
+                        font: { family: 'Poppins' }
+                    },
+                    grid: { color: '#eee' }
+                },
+                x: {
+                    ticks: {
+                        color: '#555',
+                        font: { family: 'Poppins' }
+                    },
+                    grid: { color: '#eee' }
+                }
+            }
+        };
+
+loadChart('/admin-perpustakaan/chart/peminjaman-bulan-ini', 'barChart', data => ({
+    type: 'bar',
+    data: {
+        labels: data.labels,
+        datasets: [{
+            label: 'Jumlah Peminjaman',
+            data: data.values,
+            backgroundColor: '#4e73df'
+        }]
+    },
+    options: { ...defaultOptions }
+}));
+
+
+        // 📊 Chart Kategori Buku
+        loadChart('/admin-perpustakaan/chart/kategori', 'kategoriChart', data => ({
+            type: 'bar',
+            data: {
+                labels: data.labels,
+                datasets: [{
+                    label: 'Jumlah Buku',
+                    data: data.values,
+                    backgroundColor: ['#4CAF50', '#2196F3', '#FFC107', '#FF5722', '#9C27B0']
+                }]
+            },
+            options: { ...defaultOptions }
+        }));
+
+        // 📊 Chart Peminjaman per Bulan
+        loadChart('/admin-perpustakaan/chart/peminjaman-per-bulan', 'pinjamPerBulanChart', data => ({
+            type: 'bar',
+            data: {
+                labels: data.labels,
+                datasets: [{
+                    label: 'Jumlah Peminjaman',
+                    data: data.values,
+                    backgroundColor: '#03A9F4'
+                }]
+            },
+            options: { ...defaultOptions }
+        }));
+
+        // 📈 Tren Peminjaman
+        loadChart('/admin-perpustakaan/chart/tren', 'trenChart', data => ({
+            type: 'line',
+            data: {
+                labels: data.labels,
+                datasets: [{
+                    label: 'Jumlah Peminjaman',
+                    data: data.values,
+                    borderColor: '#FF9800',
+                    backgroundColor: 'rgba(255, 152, 0, 0.2)',
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: { ...defaultOptions }
+        }));
+
+        // 🧾 Status Buku
+        loadChart('/admin-perpustakaan/chart/status', 'statusChart', data => ({
+            type: 'pie',
+            data: {
+                labels: data.labels,
+                datasets: [{
+                    label: 'Jumlah Buku',
+                    data: data.values,
+                    backgroundColor: ['#4CAF50', '#F44336']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: { family: 'Poppins', size: 14 },
+                            color: '#333'
+                        }
+                    }
+                }
+            }
+        }));
+
+        // 📚 Buku Terpopuler
+        loadChart('/admin-perpustakaan/chart/terpopuler', 'topBooksChart', data => ({
+            type: 'bar',
+            data: {
+                labels: data.labels,
+                datasets: [{
+                    label: 'Jumlah Dipinjam',
+                    data: data.values,
+                    backgroundColor: '#673AB7'
+                }]
+            },
+            options: {
+                ...defaultOptions,
+                indexAxis: 'y'
+            }
+        }));
+    });
+</script>
+</body>
+</html>

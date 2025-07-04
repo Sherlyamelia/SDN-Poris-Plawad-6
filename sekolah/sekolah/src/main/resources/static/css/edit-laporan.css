@@ -1,0 +1,256 @@
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      width: 100%;
+      height: 60px;
+      background: #1E2A38;
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    .menu-icon {
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .right-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+    }
+
+    .navbar i.user-icon {
+      font-size: 30px !important;
+    }
+
+    .navbar img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .navbar h1 {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background: #2F4050;
+      color: white;
+      height: 100vh;
+      padding-top: 80px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      transition: transform 0.3s ease-in-out;
+      overflow-y: auto;
+    }
+
+    .sidebar-hidden {
+      transform: translateX(-100%);
+    }
+
+    .admin-profile {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .admin-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .admin-profile::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.5), transparent);
+      margin-top: 10px;
+    }
+
+    .admin-name {
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .menu-list li {
+      margin: 8px 0;
+    }
+
+    .menu-list li a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .menu-list li a:hover,
+    .menu-list li a.active {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+    }
+
+    .menu-list li a i {
+      width: 25px;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .main-content {
+      padding: 80px 20px 20px 20px;
+      margin-left: 250px;
+      transition: margin-left 0.3s ease-in-out;
+    }
+
+    .main-content.full {
+      margin-left: 0;
+    }
+
+    .page-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .floating-form {
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      border-radius: 10px;
+      width: 100%;
+      max-width: 500px;
+      margin-top: 130px;
+    }
+
+    .floating-form h2 {
+      font-size: 30px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .floating-form input,
+    .floating-form textarea,
+    .floating-form select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 15px;
+      font-family: 'Poppins', sans-serif;
+      background-color: white;
+      appearance: none;
+    }
+
+    .form-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: calc(100vh - 80px);
+      padding-top: 20px;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-simpan,
+    .btn-batal {
+      background-color: #28a745;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      flex: 1;
+    }
+
+    .btn-simpan:hover {
+      background-color: #218838;
+    }
+
+    .btn-batal {
+      background-color: #dc3545;
+    }
+
+    .btn-batal:hover {
+      background-color: #c82333;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 200px;
+      }
+
+      .main-content {
+        margin-left: 200px;
+      }
+
+      .main-content.full {
+        margin-left: 0;
+      }
+
+      .floating-form {
+        margin-top: 80px;
+        max-width: 90%;
+      }
+
+      .floating-form h2 {
+        font-size: 18px;
+      }
+
+      .floating-form input,
+      .floating-form textarea,
+      .floating-form select {
+        font-size: 14px;
+         font-family: 'Poppins', sans-serif;
+      }
+
+      .button-container {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .btn-simpan,
+      .btn-batal {
+        flex: none;
+        width: 100%;
+      }
+    }

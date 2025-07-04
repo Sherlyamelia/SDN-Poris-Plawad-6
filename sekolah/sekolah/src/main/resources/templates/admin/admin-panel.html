@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dashboard Admin - SDN Poris Pelawad 6</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" th:href="@{/css/admin-panel.css}">
+</head>
+
+<body>
+<div class="navbar">
+  <span class="menu-icon" onclick="toggleSidebar()">☰</span>
+  <div class="right-section">
+    <i class="fa fa-user"></i>
+    <h1>Admin Sekolah</h1>
+  </div>
+</div>
+
+<div class="sidebar" id="sidebar">
+  <div class="admin-profile">
+    <img src="/img/Logo.png" alt="Profil Admin" class="admin-image">
+    <p class="admin-name">ADMIN WEBSITE</p>
+  </div>
+  <ul>
+    <li><a href="#"class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+    <li><a th:href="@{/admin/guru/data-guru}"><i class="fas fa-chalkboard-teacher"></i> Data Guru</a></li>
+    <li class="has-submenu">
+      <a href="#" onclick="toggleSubmenu(event)">
+        <span><i class="fas fa-trophy"></i> Data Prestasi</span>
+        <i class="fas fa-chevron-left submenu-toggle"></i>
+      </a>
+      <ul class="submenu">
+        <li><a th:href="@{/admin/prestasi/guru/dapres-guru}">Prestasi Guru</a></li>
+        <li><a th:href="@{/admin/prestasi/siswa/dapres-siswa}">Prestasi Siswa</a></li>
+        <li><a th:href="@{/admin/prestasi/sekolah/dapres-sekolah}">Prestasi Sekolah</a></li>
+        <li><a th:href="@{/admin/prestasi/kelas/dapres-kelas}">Prestasi Kelas</a></li>
+      </ul>
+    </li>
+    <li><a th:href="@{/admin/eskul/data-eskul}"><i class="fas fa-futbol"></i> Ekstrakurikuler</a></li>
+    <li><a th:href="@{/admin/berita/data-berita}"><i class="fas fa-newspaper"></i> Berita</a></li>
+    <li><a href="#" onclick="confirmLogout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+  </ul>
+</div>
+
+<div class="dashboard-main">
+  <div class="content" id="content">
+    <!-- Statistik Umum -->
+    <h1>Selamat Datang di Dashboard SDN Poris Plawad 6</h1>
+  </div>
+  <!-- Kiri -->
+  <div class="left-column">
+    <div class="stats-container">
+      <a href="/admin/guru/data-guru" class="stat-box">
+        <p>Jumlah Guru</p>
+        <canvas id="guruPieChart" width="250" height="250"></canvas>
+        <h3 th:text="'Total :  ' + ${totalGuru}">0</h3>
+      </a>
+      <a href="/admin/eskul/data-eskul" class="stat-box">
+        <p>Jumlah Ekstrakurikuler</p>
+        <canvas id="eskulChart" width="400" height="300"></canvas>
+        <h3 th:text="'Total :  ' + ${totalEkstrakurikuler}">0</h3>
+      </a>
+    </div>
+
+    <div class="popular-berita-box">
+      <h3>Berita Terpopuler</h3>
+
+      <div class="berita-card-container" th:if="${beritaPopuler != null}">
+        <div class="berita-card" th:each="berita : ${beritaPopuler}">
+          <img th:src="@{/img/berita/{img}(img=${berita.foto})}" alt="Foto Berita" />
+          <div class="berita-card-content">
+            <p class="judul" th:text="${berita.judul}">Judul Berita</p>
+            <p class="views" th:text="'👁 ' + ${berita.views} + ' kali dibaca'">0 kali dibaca</p>
+          </div>
+        </div>
+      </div>
+
+      <div th:if="${beritaPopuler == null}">
+        <p>Belum ada berita populer</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kanan -->
+  <div class="chart-wrapper">
+    <div class="chart-container">
+      <h2>Prestasi Siswa per Tahun</h2>
+      <canvas id="siswaChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+      <h2>Prestasi Guru per Tahun</h2>
+      <canvas id="guruChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+      <h2>Prestasi Sekolah per Tahun</h2>
+      <canvas id="sekolahChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    const content = document.getElementById("content");
+    sidebar.classList.toggle("sidebar-hidden");
+    content.classList.toggle("sidebar-collapsed");
+  }
+
+  function toggleSubmenu(event) {
+    event.preventDefault();
+    let submenuContainer = event.target.closest(".has-submenu");
+    let submenu = submenuContainer.querySelector(".submenu");
+    let icon = submenuContainer.querySelector(".submenu-toggle");
+    let isOpen = submenu.style.display === "block";
+
+    document.querySelectorAll(".submenu").forEach(s => s.style.display = "none");
+    document.querySelectorAll(".submenu-toggle").forEach(i => i.style.transform = "rotate(0deg)");
+    document.querySelectorAll(".has-submenu").forEach(hs => hs.classList.remove("submenu-open"));
+
+    if (!isOpen) {
+      submenu.style.display = "block";
+      icon.style.transform = "rotate(90deg)";
+      submenuContainer.classList.add("submenu-open");
+    }
+  }
+
+  function confirmLogout() {
+      Swal.fire({
+        title: 'Yakin ingin logout?',
+        text: "Kamu akan keluar dari sistem.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Ya, logout',
+        cancelButtonText: 'Batal'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = "/login";
+        }
+      });
+    }
+
+  // Highlight menu saat diklik
+  document.querySelectorAll('.menu-list a').forEach(link => {
+    link.addEventListener('click', function (e) {
+      // Jika href # maka prevent default
+      if (this.getAttribute("href") === "#") {
+        e.preventDefault();
+      }
+
+      // Hapus semua active
+      document.querySelectorAll('.menu-list a').forEach(el => el.classList.remove('active'));
+      // Tambah active ke yang diklik
+      this.classList.add('active');
+    });
+  });
+
+//pie bar
+  const totalLaki = [[${totalGuruLaki}]];
+  const totalPerempuan = [[${totalGuruPerempuan}]];
+
+  const ctx = document.getElementById('guruPieChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['Laki-laki', 'Perempuan'],
+      datasets: [{
+        data: [totalLaki, totalPerempuan],
+        backgroundColor: ['#4e73df', '#e83e8c'],
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom',
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              let label = context.label || '';
+              let value = context.parsed || 0;
+              return `${label}: ${value} guru`;
+            }
+          }
+        }
+      }
+    }
+  });
+
+  //chart eskul
+  const totalWajib = [[${totalWajib}]];
+  const totalPilihan = [[${totalPilihan}]];
+
+  new Chart(document.getElementById('eskulChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Wajib', 'Pilihan'],
+      datasets: [{
+        label: 'Jumlah Ekstrakurikuler',
+        data: [totalWajib, totalPilihan],
+        backgroundColor: ['#36b9cc', '#e74a3b']
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Jumlah Ekstrakurikuler Berdasarkan Kategori'
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          precision: 0
+        }
+      }
+    }
+  });
+
+//chart prestasi
+  const tahunLabels = [[${tahunLabels}]];
+  const dataGuru = [[${dataGuru}]];
+  const dataSiswa = [[${dataSiswa}]];
+  const dataSekolah = [[${dataSekolah}]];
+
+  // Grafik Guru
+  new Chart(document.getElementById('guruChart'), {
+  type: 'line',
+  data: {
+    labels: tahunLabels,
+    datasets: [{
+      label: 'Prestasi Guru',
+      data: dataGuru,
+      borderColor: '#4e73df',
+      backgroundColor: 'transparent',
+      tension: 0.3,
+      fill: false
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: 'Prestasi Guru per Tahun'
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        precision: 0
+      }
+    }
+  }
+});
+
+  // Grafik Siswa (Line Chart)
+new Chart(document.getElementById('siswaChart'), {
+  type: 'line',
+  data: {
+    labels: tahunLabels,
+    datasets: [{
+      label: 'Prestasi Siswa',
+      data: dataSiswa,
+      borderColor: '#1cc88a',
+      backgroundColor: 'transparent',
+      tension: 0.3,
+      fill: false
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: 'Prestasi Siswa per Tahun'
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        precision: 0
+      }
+    }
+  }
+});
+
+// Grafik Sekolah (Line Chart)
+new Chart(document.getElementById('sekolahChart'), {
+  type: 'line',
+  data: {
+    labels: tahunLabels,
+    datasets: [{
+      label: 'Prestasi Sekolah',
+      data: dataSekolah,
+      borderColor: '#f6c23e',
+      backgroundColor: 'transparent',
+      tension: 0.3,
+      fill: false
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: 'Prestasi Sekolah per Tahun'
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        precision: 0
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

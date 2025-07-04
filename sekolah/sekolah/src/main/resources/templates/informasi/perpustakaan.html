@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perpustakaan - SDN Poris Pelawad 6</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<style>
+    /* Global Styles */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: Arial, sans-serif;
+background-color: #ffffff;
+color: #333;
+}
+.wrapper {
+flex: 1;
+}
+
+/* Navbar */
+.navbar {
+background-color: #708e7a;
+font-family: 'Arial', sans-serif;
+color: white;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 0.5rem 1rem; /* Mengurangi padding */
+position: relative;
+}
+
+
+.logo-container {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+margin-left: 5px; /* Jarak dari tepi kiri */
+}
+
+.logo-img {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+object-fit: cover;
+}
+
+.logo-text {
+font-size: 1.4rem; /* Ukuran yang sedikit lebih besar */
+font-weight: bold;
+color: white;
+white-space: nowrap; /* Memastikan teks tetap satu baris */
+}
+
+/* Navigation Links */
+.nav-links {
+list-style: none;
+display: flex;
+gap: 1rem;
+}
+/* Tambahkan ini untuk submenu paling kanan agar tidak keluar layar */
+.nav-links li:last-child .dropdown-content {
+    right: 0;
+    left: auto;
+}
+
+.nav-links a {
+color: white;
+text-decoration: none;
+font-weight: 500;
+font-size: 14px; /* Ubah ukuran font jadi sedikit lebih besar */
+}
+
+.nav-links a:hover {
+text-decoration: underline;
+}
+
+/* Dropdown Styles */
+.dropdown-content {
+display: none;
+position: absolute;
+background-color: white;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+z-index: 999;
+}
+
+.dropdown:hover .dropdown-content {
+display: block;
+}
+
+.dropdown-content a {
+color: #111;
+padding: 10px 15px;
+display: block;
+}
+.dropdown-content a:hover {
+background-color: #f0f0f0;
+}
+
+.hamburger {
+display: none;
+flex-direction: column;
+gap: 5px;
+cursor: pointer;
+}
+
+.hamburger span {
+width: 25px;
+height: 3px;
+background-color: white;
+}
+.container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem 1rem;
+    }
+
+    h2 {
+      color: #198754;
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .form-label {
+      display: block;
+      margin: 0.5rem auto;
+      width: 50%;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .form-select {
+    display: block;
+    margin: 0 auto 2rem auto;
+    width: 50%;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    height: 45px;
+    text-transform: none; /* <-- Tidak kapital */
+    font-weight: normal;  /* <-- Tidak bold */
+  }
+
+  .form-select option {
+    text-transform: none; /* <-- Tidak kapital */
+    font-weight: normal;  /* <-- Tidak bold */
+  }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .col {
+      flex: 1 1 calc(33% - 2rem);
+      box-sizing: border-box;
+      max-width: calc(33% - 2rem);
+    }
+    .card-text {
+  font-size: 0.95rem;
+  margin-bottom: 0.8rem; /* Tambah jarak antar paragraf */
+  line-height: 1.6;       /* Tambah tinggi baris agar lebih lega */
+}
+
+/* Footer Styling */
+footer {
+    background-color: #708e7a;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 30px;
+}
+
+.social-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 10px;
+    flex-wrap: nowrap; /* Mencegah elemen membungkus ke bawah */
+    overflow-x: auto; /* Menambahkan scroll horizontal jika layar terlalu kecil */
+}
+
+.social-link {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.social-link i {
+    margin-right: 8px;
+    font-size: 20px; /* Ukuran tetap untuk ikon */
+}
+
+.social-link:hover {
+    text-decoration: underline;
+}
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            background-color: #708e7a;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .nav-links.active {
+            display: flex;
+        }
+        .logo-container {
+            margin-left: 10px; /* Sesuaikan lagi untuk tampilan mobile */
+        }
+
+        .logo-text {
+            font-size: 1rem; /* Ukuran font lebih kecil agar tetap satu baris */
+        }
+        .hamburger {
+            display: flex;
+        }
+
+        .navbar {
+            padding: 1rem;
+        }
+        .col {
+        flex: 1 1 100%;
+        max-width: 100%;
+      }
+
+      .form-select {
+        width: 90%;
+      }
+
+      .form-label {
+        width: 90%;
+      }
+    }
+
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-img-top {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 1rem;
+    }
+
+    .card-title {
+      color: #4f9b77;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-text {
+      font-size: 0.9rem;
+      margin: 0.3rem 0;
+    }
+  .footer {
+    font-size: 12px;
+}
+.social-link {
+        font-size: 10px; /* Ukuran lebih kecil untuk teks */
+    }
+
+    .social-media {
+        gap: 10px; /* Kurangi jarak antar elemen */
+    }
+
+</style>
+
+<body>
+<header>
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="/img/Logo.png" alt="Logo SDN Poris Pelawad 6" class="logo-img">
+                <span class="logo-text">SDN PORIS PELAWAD 6</span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a th:href="@{/}">Beranda</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Profil</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/profil/visi-misi}">Visi & Misi</a>
+                        <a th:href="@{/profil/guru-tendik}">Guru & Tendik</a>
+                        <a th:href="@{/profil/sarana-prasarana}">Sarana & Prasana</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Kesiswaan</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/kesiswaan/tata-tertib}">Tata Tertib</a>
+                        <a th:href="@{/kesiswaan/ekstrakurikuler}">Ekstrakurikuler</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Adiwiyata</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/adiwiyata/ipmlh}">IPMLH</a>
+                        <a th:href="@{/adiwiyata/visi-misi-adiwiyata}">Visi & Misi Adiwiyata</a>
+                        <a th:href="@{/adiwiyata/struktur-adiwiyata}">Struktur Adiwiyata</a>
+                        <a th:href="@{/adiwiyata/program-adiwiyata}">Program Adiwiyata</a>
+                        <a th:href="@{/adiwiyata/dokumentasi-adiwiyata}">Dokumentasi</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Prestasi</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/prestasi/prestasi-sekolah}">Prestasi Sekolah</a>
+                        <a th:href="@{/prestasi/prestasi-guru}">Prestasi Guru</a>
+                        <a th:href="@{/prestasi/prestasi-murid}">Prestasi Murid</a>
+                        <a th:href="@{/prestasi/prestasi-kelas}">Prestasi Kelas</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Informasi</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/informasi/ppdb}">PPDB</a>
+                        <a th:href="@{/informasi/berita}">Berita</a>
+                        <a th:href="@{/informasi/perpustakaan}">Perpustakaan</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+</header>
+<div class="container">
+    <h2>📖 Perpustakaan Sekolah</h2>
+
+    <div class="mb-4 text-center">
+        <label for="filterKategori" class="form-label">🎯 Pilih Kategori Buku:</label>
+        <select id="filterKategori" class="form-select" onchange="filterKategori()">
+            <option value="semua">Semua Kategori</option>
+            <th:block th:each="kategori : ${kategoriList}">
+                <option th:value="${kategori}" th:text="${#strings.capitalize(kategori)}"></option>
+            </th:block>
+        </select>
+    </div>
+
+    <div class="row" id="kartuBuku">
+        <div class="col-md-4 mb-4 kartu-buku" th:each="buku : ${listBuku}" th:attr="data-kategori=${buku.kategori}">
+            <div class="card h-100 shadow-sm">
+                <img th:src="@{/img/buku/{foto}(foto=${buku.foto})}" class="card-img-top" th:alt="${buku.namaBuku}" style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${buku.namaBuku}"></h5>
+                    <p class="card-text"><strong>📚 Kategori:</strong> <span th:text="${buku.kategori}"></span></p>
+                    <p class="card-text"><strong>✍️ Pengarang:</strong> <span th:text="${buku.pengarang}"></span></p>
+                    <p class="card-text"><strong>📦 Stok:</strong> <span th:text="${buku.qty}"></span> buku</p>
+                    <p class="card-text" th:text="${buku.deskripsi}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="social-media">
+        <a href="#" class="social-link"><i class="fab fa-youtube"></i> YouTube</a>
+        <a href="#" class="social-link"><i class="fab fa-instagram"></i> Instagram</a>
+        <a href="#" class="social-link"><i class="fab fa-tiktok"></i> TikTok</a>
+    </div>
+    <p>&copy; 2024 SDN Poris Pelawad 06. All rights reserved.</p>
+</footer>
+
+<script>
+    function toggleMenu() {
+        const navLinks = document.getElementById("nav-links");
+        navLinks.classList.toggle("active");
+    }
+
+    function filterKategori() {
+        const kategoriDipilih = document.getElementById("filterKategori").value;
+        const kartuBuku = document.querySelectorAll(".kartu-buku");
+
+        kartuBuku.forEach(function(kartu) {
+            const kategori = kartu.getAttribute("data-kategori");
+
+            if (kategoriDipilih === "semua" || kategoriDipilih === kategori) {
+                kartu.style.display = "block";
+            } else {
+                kartu.style.display = "none";
+            }
+        });
+    }
+
+    // Fungsi untuk memuat data dari data-buku.html
+    function filterKategori() {
+        const selectedKategori = document.getElementById("filterKategori").value.toLowerCase();
+        const kartuBuku = document.querySelectorAll(".kartu-buku");
+
+        kartuBuku.forEach(card => {
+            const kategori = card.getAttribute("data-kategori").toLowerCase();
+            if (selectedKategori === "semua" || kategori === selectedKategori) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    }
+</script>
+</body>
+</html>

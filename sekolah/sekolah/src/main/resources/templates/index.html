@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDN Poris Pelawad 6</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/index.css">
+</head>
+
+<body>
+<header>
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="/img/Logo.png" alt="Logo SDN Poris Pelawad 6" class="logo-img">
+                <span class="logo-text">SDN PORIS PELAWAD 6</span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a th:href="@{/}">Beranda</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Profil</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/profil/visi-misi}">Visi & Misi</a>
+                        <a th:href="@{/profil/guru-tendik}">Guru & Tendik</a>
+                        <a th:href="@{/profil/sarana-prasarana}">Sarana & Prasana</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Kesiswaan</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/kesiswaan/tata-tertib}">Tata Tertib</a>
+                        <a th:href="@{/kesiswaan/ekstrakurikuler}">Ekstrakurikuler</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Adiwiyata</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/adiwiyata/ipmlh}">IPMLH</a>
+                        <a th:href="@{/adiwiyata/visi-misi-adiwiyata}">Visi & Misi Adiwiyata</a>
+                        <a th:href="@{/adiwiyata/struktur-adiwiyata}">Struktur Adiwiyata</a>
+                        <a th:href="@{/adiwiyata/program-adiwiyata}">Program Adiwiyata</a>
+                        <a th:href="@{/adiwiyata/dokumentasi-adiwiyata}">Dokumentasi</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Prestasi</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/prestasi/prestasi-sekolah}">Prestasi Sekolah</a>
+                        <a th:href="@{/prestasi/prestasi-guru}">Prestasi Guru</a>
+                        <a th:href="@{/prestasi/prestasi-murid}">Prestasi Murid</a>
+                        <a th:href="@{/prestasi/prestasi-kelas}">Prestasi Kelas</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Informasi</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/informasi/ppdb}">PPDB</a>
+                        <a th:href="@{/informasi/berita}">Berita</a>
+                        <a th:href="@{/informasi/perpustakaan}">Perpustakaan</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <h1></h1>
+    <p></p>
+</section>
+<section class="features-section">
+    <div class="feature">
+        <img src="/img/akre.png" alt="Terakreditasi A">
+        <h3>Terakreditasi A</h3>
+        <p>Terakreditasi A (Sangat Baik) Oleh BAN-SM Tahun 2019</p>
+    </div>
+    <div class="feature">
+        <img src="/img/Logo.png" alt="Sekolah Adiwiyata">
+        <h3>Sekolah Adiwiyata</h3>
+        <p>Lingkungan Sekolah yang Asri dan Nyaman untuk Belajar</p>
+    </div>
+</section>
+<div class="divider-line"></div>
+<!-- Section: Sambutan Kepala Sekolah -->
+<section class="welcome-section">
+    <div class="container">
+        <div class="image-wrapper">
+            <img src="/img/guru/IBU JUHE.png" alt="Foto Kepala Sekolah">
+        </div>
+        <div class="text-wrapper">
+            <h2>Sambutan Kepala Sekolah</h2>
+            <h3>SDN Poris Pelawad 6</h3>
+            <!-- Tambahkan div untuk teks yang akan di-justify -->
+            <div class="justify-text">
+                <p>Assalamu'alaikum Warahmatullahi Wabarakatuh,</p>
+                <p>
+                    Salam Sejahtera untuk kita semua. Selamat datang di situs web resmi SDN Poris Pelawad 6.
+                    Kami berharap situs ini dapat menjadi jendela informasi sekaligus media komunikasi bagi siswa,
+                    orang tua, dan masyarakat.
+                </p>
+                <p>
+                    Melalui situs ini, kami berkomitmen untuk terus memberikan informasi terkini terkait kegiatan
+                    sekolah, prestasi siswa, serta program-program pendidikan yang mendukung perkembangan potensi
+                    anak didik kami. Semoga keberadaan situs ini dapat mempererat kerja sama dan partisipasi aktif
+                    semua pihak dalam memajukan pendidikan di sekolah kita tercinta.
+                </p>
+                <p>
+                    Terima kasih atas kunjungan Anda. Semoga SDN Poris Pelawad 6 semakin berprestasi dan berkontribusi
+                    dalam membentuk generasi penerus bangsa yang unggul dan berkarakter.
+                </p>
+                <p>Wassalamu'alaikum Warahmatullahi Wabarakatuh.</p>
+            </div>
+            <!-- Nama Kepala Sekolah dengan jarak tambahan -->
+            <p class="kepala-sekolah-name">
+                <strong>Juhairiyah , S.pd, M.pd</strong><br>
+                Kepala Sekolah SDN Poris Pelawad 6
+            </p>
+        </div>
+    </div>
+</section>
+<div class="divider-line"></div>
+<section class="program-section">
+    <div class="program-item">
+        <div class="program-text">
+            <h2>Program Unggulan</h2>
+            <p>Baca tulis Al-Qur'an dengan guru berkualitas</p>
+        </div>
+        <div class="program-image">
+            <img src="/img/Btq.jpeg" alt="Program Unggulan">
+        </div>
+    </div>
+
+    <div class="program-item">
+        <div class="program-text">
+            <h2>Program Tangerang Mengaji</h2>
+            <p>Program Yang diadakan Pemerintah Untuk setiap sekolah</p>
+        </div>
+        <div class="program-image">
+            <img src="/img/Tangerang Mengaji.jpeg" alt="Program Tangerang Mengaji">
+        </div>
+    </div>
+
+    <div class="program-item">
+        <div class="program-text">
+            <h2>Tadarus Jum'at</h2>
+            <p>Rutinitas Tadarus bersama sekolah sdn poris pelawad 4&6</p>
+        </div>
+        <div class="program-image">
+            <img src="/img/Program Jumat.jpeg" alt="Tadarus Jum'at">
+        </div>
+    </div>
+</section>
+
+<div class="section">
+    <h2>Berita Terbaru</h2>
+    <div class="news-container">
+        <div class="news-item" th:each="berita : ${beritaTerbaru}">
+            <img th:src="@{'/img/berita/' + ${berita.foto}}" alt="Gambar Berita" />
+            <h3 th:text="${berita.judul}">Judul Berita</h3>
+            <p th:text="${berita.deskripsi.length() > 100 ? #strings.substring(berita.deskripsi, 0, 100) + '...' : berita.deskripsi}">
+                Isi singkat berita akan tampil di sini.
+            </p>
+            <a th:href="@{/informasi/sub-berita/{id}(id=${berita.id})}" class="btn-link">
+                <button>Baca Selengkapnya</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="divider-line"></div>
+<!-- Bagian Galeri Kegiatan -->
+<section class="section-news">
+    <h2>Galeri Kegiatan</h2>
+    <div class="gallery-wrapper">
+        <div class="gallery-track">
+            <div class="card"><img src="/img/Upacara Senin.jpg" alt="Upacara Senin"><div class="card-title">Upacara Senin</div></div>
+            <div class="card"><img src="/img/Program Jumat.jpeg" alt="Tadarus Jum'at"><div class="card-title">Tadarus Jum'at</div></div>
+            <div class="card"><img src="/img/Tangerang Mengaji.jpeg" alt="Tangerang Mengaji"><div class="card-title">Tangerang Mengaji</div></div>
+            <div class="card"><img src="/img/Penyambutan Siswa.jpeg" alt="Penyambutan Siswa"><div class="card-title">Penyambutan Siswa</div></div>
+            <div class="card"><img src="/img/Gelar Karya.jpeg" alt="Gelar Karya P5"><div class="card-title">Gelar Karya P5</div></div>
+            <div class="card"><img src="/img/Classmet.jpeg" alt="Class Meeting"><div class="card-title">Class Meeting</div></div>
+            <div class="card"><img src="/img/Pekan Literasi.jpeg" alt="Pekan Literasi"><div class="card-title">Pekan Literasi</div></div>
+            <div class="card"><img src="/img/Solat Jumat.jpeg" alt="Sholat Berjamaah"><div class="card-title">Sholat Berjamaah</div></div>
+            <div class="card"><img src="/img/Pembelajaran.jpeg" alt="Pembelajaran Luar Kelas"><div class="card-title">Pembelajaran Luar Kelas</div></div>
+            <div class="card"><img src="/img/Hari Guru.jpeg" alt="Hari Guru"><div class="card-title">Hari Guru</div></div>
+            <div class="card"><img src="/img/Maulid.jpeg" alt="Maulid Nabi Muhammad"><div class="card-title">Maulid Nabi Muhammad</div></div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Video Kegiatan</h2>
+    <div class="grid-container">
+        <div class="card">
+            <iframe width="100%" height="150"
+                    src="https://www.youtube.com/embed/y0hMbR1Q2Vw"
+                    title="Video Kegiatan"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+            </iframe>
+            <div class="card-title">Lomba futsal dalam memperingati hari guru nasional dan hut pgri </div>
+        </div>
+        <div class="card">
+            <iframe width="100%" height="150"
+                    src="https://www.youtube.com/embed/aV1GLvFEaPE"
+                    title="Video Kegiatan"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+            </iframe>
+            <div class="card-title">Lomba Pidato Bahasa inggris 'Menyayangi Anak Yatim'</div>
+        </div>
+        <div class="card">
+            <iframe width="100%" height="150"
+                    src="https://www.youtube.com/embed/yUmChEDBfeM"
+                    title="Video Kegiatan"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+            </iframe>
+            <div class="card-title">O2SN Cabang Lomba Pecak Silat Putra oleh ananda "Rayi"</div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="social-media">
+        <a href="https://www.instagram.com/sdnporispelawad6?igsh=NXExNnVwcHpuNWh3" class="social-link"><i class="fab fa-instagram"></i> Instagram</a>
+        <a href="https://youtube.com/@sdnpp6channel80?feature=shared" class="social-link"><i class="fab fa-youtube"></i> Youtube</a>
+    </div>
+    <p>&copy; 2024 SDN Poris Pelawad 06. All rights reserved.</p>
+</footer>
+<script>
+    let currentImageIndex = 0;
+    const images = ["img/Tampilan1.png", "img/Tampilan2.png",]; // Tambahkan path gambar lainnya
+
+    // Function untuk mengganti background
+    function changeBackground() {
+        document.querySelector(".hero").style.backgroundImage = `url(${images[currentImageIndex]})`;
+        currentImageIndex = (currentImageIndex + 1) % images.length; // Loop kembali ke gambar pertama
+    }
+
+    // Set interval untuk pergantian background (misal, 5 detik)
+    setInterval(changeBackground, 4000);
+
+    // Hamburger menu toggle
+    function toggleMenu() {
+        const navLinks = document.getElementById("nav-links");
+        navLinks.classList.toggle("active");
+    }
+
+    const track = document.querySelector('.gallery-wrapper');
+
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  track.addEventListener('mousedown', (e) => {
+    isDown = true;
+    track.classList.add('active');
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+  });
+
+  track.addEventListener('mouseleave', () => {
+    isDown = false;
+    track.classList.remove('active');
+  });
+
+  track.addEventListener('mouseup', () => {
+    isDown = false;
+    track.classList.remove('active');
+  });
+
+  track.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    const walk = (x - startX) * 2; // nilai *2 buat lebih cepat
+    track.scrollLeft = scrollLeft - walk;
+  });
+</script>
+</body>
+</html>

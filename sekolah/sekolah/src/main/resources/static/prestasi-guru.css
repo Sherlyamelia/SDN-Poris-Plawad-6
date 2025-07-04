@@ -1,0 +1,378 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+}
+
+.wrapper {
+    flex: 1;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #708e7a;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem; /* Mengurangi padding */
+    overflow: visible; /* Pastikan dropdown tidak terpotong */
+    position: relative; /* Tetap untuk positioning dropdown */
+}
+
+/* Logo */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 5px; /* Jarak dari tepi kiri */
+}
+
+.logo-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.logo-text {
+    font-size: 1.4rem; /* Ukuran yang sedikit lebih besar */
+    font-weight: bold;
+    color: white;
+    white-space: nowrap; /* Memastikan teks tetap satu baris */
+}
+
+/* Navigation Links */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-links li:last-child .dropdown-content {
+    right: 0;
+    left: auto;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px; /* Ubah ukuran font jadi sedikit lebih besar */
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* Dropdown Styles */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Box-shadow lebih tajam */
+    z-index: 9999; /* Pastikan berada di atas elemen lain */
+    border-radius: 5px; /* Tambahan untuk estetika */
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: #111;
+    padding: 10px 15px;
+    display: block;
+    text-decoration: none; /* Pastikan tidak ada underline */
+}
+
+.dropdown-content a:hover {
+    background-color: #f0f0f0;
+}
+
+/* Hamburger Menu (Mobile) */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+}
+
+.hero {
+    background: url('img/Prestasi Guru.png') center/cover no-repeat;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    width: 100%; /* Pastikan memenuhi lebar layar */
+    transition: background-image 1s ease-in-out; /* Animasi untuk pergantian background */
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    z-index: 1;
+}
+
+.hero-overlay {
+    position: relative;
+    z-index: 2; /* Agar teks berada di atas overlay */
+}
+
+.hero-overlay p {
+    color: white;
+    font-size: clamp(1.5rem, 5vw, 3rem); /* Gunakan clamp untuk responsivitas */
+    font-weight: bold;
+    margin: 0;
+    text-align: center; /* Pastikan teks berada di tengah */
+}
+
+/* Container */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px;
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 0 10px;
+}
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .section {
+            background: white;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            text-align: center;
+            color: #4caf50;
+        }
+
+        /* Styling tabel dasar tetap sama */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 10px;
+}
+
+table th {
+    background-color: #4caf50;
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Wrapper untuk membuat tabel responsif */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling untuk perangkat mobile */
+    width: 100%;
+}
+.section {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 10px 15px;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            color: #18a045;
+            margin-bottom: 20px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Tiga kolom */
+            gap: 15px; /* Jarak antar elemen */
+        }
+
+        .card {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05); /* Efek hover */
+        }
+
+        .card img {
+            width: 100%;
+            height: 150px; /* Tinggi gambar tetap */
+            object-fit: cover; /* Gambar dipotong jika lebih besar */
+        }
+
+        .card-title {
+            background-color: #708e7a;
+            color: #fff;
+            font-size: 1rem;
+            padding: 10px 0;
+            text-transform: uppercase;
+        }
+
+/* Footer Styling */
+footer {
+    background-color: #708e7a;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 30px;
+}
+
+.social-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 10px;
+    flex-wrap: nowrap; /* Mencegah elemen membungkus ke bawah */
+    overflow-x: auto; /* Menambahkan scroll horizontal jika layar terlalu kecil */
+}
+
+.social-link {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.social-link i {
+    margin-right: 8px;
+    font-size: 20px; /* Ukuran tetap untuk ikon */
+}
+
+.social-link:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 60px;
+        right: 20px;
+        background-color: #708e7a;
+        padding: 10px;
+        border-radius: 8px;
+        z-index: 9999;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+    .logo-container {
+        margin-left: 10px; /* Sesuaikan lagi untuk tampilan mobile */
+    }
+
+    .logo-text {
+        font-size: 1rem; /* Ukuran font lebih kecil agar tetap satu baris */
+    }
+    .hamburger {
+        display: flex;
+    }
+    table {
+        font-size: 14px; /* Kurangi ukuran font agar lebih pas */
+    }
+
+    table th, table td {
+        padding: 8px; /* Kurangi padding pada sel tabel */
+    }
+    .section h2 {
+            font-size: 1rem;
+            color: #18a045;
+            margin-bottom: 20px;
+        }
+    .grid-container {
+    grid-template-columns: repeat(2, 1fr); /* Dua kolom */
+    }
+    /* Divider Line */
+    .divider-line {
+        height: 5px; /* Tipiskan garis untuk tampilan mobile */
+    }
+    .footer {
+        font-size: 12px;
+    }
+    .content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero {
+        height: 200px; /* Sesuaikan tinggi untuk perangkat kecil */
+    }
+    .hero-overlay p {
+        font-size: clamp(1rem, 4vw, 2rem); /* Sesuaikan ukuran font */
+    }
+    /* Adjust Container Layout */
+    .container {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 20px; /* Beri ruang pada sisi layar */
+    }
+
+    .social-link {
+        font-size: 10px; /* Ukuran lebih kecil untuk teks */
+    }
+
+    .social-media {
+        gap: 10px; /* Kurangi jarak antar elemen */
+    }
+    @media (max-width: 480px) {
+        .grid-container {
+            grid-template-columns: 1fr; /* Satu kolom */
+        }
+    }

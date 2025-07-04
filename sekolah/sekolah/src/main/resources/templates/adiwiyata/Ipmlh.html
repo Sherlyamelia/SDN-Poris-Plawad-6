@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekstrakurikuler - SDN PORIS PELAWAD 6</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/ipmlh.css">
+</head>
+
+<body>
+<header>
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="/img/Logo.png" alt="Logo SDN Poris Pelawad 6" class="logo-img">
+                <span class="logo-text">SDN PORIS PELAWAD 6</span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a th:href="@{/}">Beranda</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Profil</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/profil/visi-misi}">Visi & Misi</a>
+                        <a th:href="@{/profil/guru-tendik}">Guru & Tendik</a>
+                        <a th:href="@{/profil/sarana-prasarana}">Sarana & Prasana</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Kesiswaan</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/kesiswaan/tata-tertib}">Tata Tertib</a>
+                        <a th:href="@{/kesiswaan/ekstrakurikuler}">Ekstrakurikuler</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Adiwiyata</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/adiwiyata/ipmlh}">IPMLH</a>
+                        <a th:href="@{/adiwiyata/visi-misi-adiwiyata}">Visi & Misi Adiwiyata</a>
+                        <a th:href="@{/adiwiyata/struktur-adiwiyata}">Struktur Adiwiyata</a>
+                        <a th:href="@{/adiwiyata/program-adiwiyata}">Program Adiwiyata</a>
+                        <a th:href="@{/adiwiyata/dokumentasi-adiwiyata}">Dokumentasi</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Prestasi</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/prestasi/prestasi-sekolah}">Prestasi Sekolah</a>
+                        <a th:href="@{/prestasi/prestasi-guru}">Prestasi Guru</a>
+                        <a th:href="@{/prestasi/prestasi-murid}">Prestasi Murid</a>
+                        <a th:href="@{/prestasi/prestasi-kelas}">Prestasi Kelas</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Informasi</a>
+                    <div class="dropdown-content">
+                        <a th:href="@{/informasi/ppdb}">PPDB</a>
+                        <a th:href="@{/informasi/berita}">Berita</a>
+                        <a th:href="@{/informasi/perpustakaan}">Perpustakaan</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </div>
+</header>
+
+    <section class="hero">
+        <h1></h1>
+    </section>
+    <main>
+      <section class="section">
+          <h2>IDENTIFIKASI POTENSI & MASALAH LINGKUNGAN HIDUP</h2>
+          <div class="table-responsive">
+              <table>
+                  <thead>
+                      <tr>
+                          <th>No</th>
+                          <th>Tujuan Program Adiwiyata</th>
+                          <th>Dampak Program Adiwiyata di Sekolah</th>
+                          <th>Implementasi Program Adiwiyata</th>
+                          <th>Dampak Positif</th>
+                          <th>Potensi Lingkungan Hidup</th>
+                          <th>Masalah Lingkungan Hidup</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td>1</td>
+                          <td>Meningkatkan Kesadaran Lingkungan</td>
+                          <td>Peningkatan Kesadaran san Partisipasi</td>
+                          <td>Pengelolaan Sampah Berbasis Siswa</td>
+                          <td>Peningkatan Kesadaran Lingkungan di kalangan sekolah</td>
+                          <td>Kesadaran Lingkungan yang tinggi</td>
+                          <td>Tantangan Urbanisasi</td>
+                      </tr>
+                      <tr>
+                          <td>2</td>
+                          <td>Membangun Sikap Peduli Lingkungan</td>
+                          <td>Lingkungan Sekolah yang lebih Bersih dan sehat</td>
+                          <td>Penanaman Pohon dan Penghijauan</td>
+                          <td>Terciptanya Lingkungan sekolah yang lebih bersih dan sehat</td>
+                          <td>Pengelolaan Sampah yang Efektif</td>
+                          <td>Keterbatasan Lahan Hijau</td>
+                      </tr>
+                      <tr>
+                          <td>3</td>
+                          <td>Mengintegrasikan Pendidikan Lingkungan Hidup</td>
+                          <td>Pembelajaran Berkelanjutan</td>
+                          <td>Kurikulum Berbasis Lingkungan</td>
+                          <td>Siswa menjadi lebih kreatif dalam mencari solusi untuk permasalahan lingkungan yang ada di sekitar mereka</td>
+                          <td>Area Penghijauan yang dikelola dengan baik</td>
+                          <td>Pengelolaan Sampah yang Menantang</td>
+                      </tr>
+                      <tr>
+                          <td>4</td>
+                          <td>Meningkatkan Kualitas Lingkungan Hidup</td>
+                          <td>Peningkatan Kreativitas dan Invoasi</td>
+                          <td>Kegiatan Ekstrakurikuler Berbasis Lingkungan</td>
+                          <td>-</td>
+                          <td>Kurikulum Berbasis Lingkungan</td>
+                          <td>Sumber Daya dan Dukungan</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </section>
+  </main>
+  <div class="container">
+    <div class="program-box" onclick="showContent('polisi')">
+      <h3>TUJUAN PROGRAM ADIWIYATA</h3>
+    </div>
+    <div class="program-box" onclick="showContent('pengelolaan')">
+      <h3>DAMPAK PROGRAM ADIWIYATA DI SEKOLAH</h3>
+    </div>
+    <div class="program-box" onclick="showContent('implementasi')">
+      <h3>IMPLEMENTASI PROGRAM ADIWIYATA</h3>
+    </div>
+    <div class="program-box" onclick="showContent('dampak')">
+      <h3>DAMPAK POSITIF</h3>
+    </div>
+    <div class="program-box" onclick="showContent('potensi')">
+      <h3>POTENSI LINGKUNGAN HIDUP</h3>
+    </div>
+    <div class="program-box" onclick="showContent('masalah')">
+      <h3>MASALAH LINGKUNGAN HIDUP</h3>
+    </div>
+  </div>
+  
+    
+      <!-- Add 11 Content Sections -->
+<div id="polisi" class="content">
+  <h1 style="color: green;">Tujuan Program Adiwiyata</h1>
+  <ol>
+      <li>
+          Meningkatkan Kesadaran Lingkungan
+          <p>
+              Menumbuhkan pemahaman dan kesadaran siswa mengenai pentingnya menjaga lingkungan agar lebih bersih dan sehat.
+          </p>
+      </li>
+      <li>
+        Membangun Sikap Peduli Lingkungan
+        <p>
+          Menciptakan sikap dan perilaku peduli lingkungan di kalangan siswa, guru, dan staf sekolah melalui berbagai kegiatan yang mendukung kelestarian alam. 
+        </p>
+    </li>
+     <li>
+      Mengintegrasikan Pendidikan Lingkungan Hidup
+          <p>
+            Mengintegrasikan konsep pendidikan lingkungan hidup dalam kurikulum sekolah, sehingga siswa dapat belajar dan menerapkan prinsip-prinsip ramah lingkungan dalam kehidupan sehari-hari. 
+          </p>
+      </li>
+      <li>
+        Meningkatkan Kualitas Lingkungan Sekolah
+        <p>
+          Memperbaiki kualitas lingkungan fisik sekolah melalui pengelolaan yang tepat, seperti penanaman pohon, pengelolaan sampah, dan penggunaan energi terbarukan. 
+        </p>
+    </li>
+  </ol>
+</div>
+
+<div id="pengelolaan" class="content">
+  <h1 style="color: green;">Dampak Program Adiwiyata di Sekolah</h1>
+  <ol>
+      <li>
+        Peningkatan Kesadaran dan Partisipasi
+          <p>
+            Siswa dan warga sekolah menjadi lebih sadar akan pentingnya menjaga lingkungan dan aktif berpartisipasi dalam kegiatan lingkungan.
+          </p>
+      </li>
+      <li>
+        Lingkungan Sekolah yang Lebih Bersih dan Sehat
+        <p>
+          Adanya peningkatan dalam kebersihan dan kesehatan lingkungan sekolah, yang berdampak positif pada kesehatan dan kenyamanan belajar.  
+        </p>
+    </li>
+     <li>
+      Pembelajaran Berkelanjutan
+          <p>
+            Siswa mendapatkan pembelajaran berkelanjutan mengenai lingkungan, yang bisa diaplikasikan dalam kehidupan sehari-hari. 
+          </p>
+      </li>
+      <li>
+        Peningkatan Kreativitas dan Inovasi
+        <p>
+          Mendorong siswa untuk lebih kreatif dan inovatif dalam mencari solusi terhadap permasalahan lingkungan yang dihadapi di sekolah. 
+        </p>
+    </li>
+  </ol>
+</div>
+      
+<div id="implementasi" class="content">
+  <h1 style="color: green;">Implementasi Program Adiwiyata</h1>
+  <ol>
+      <li>
+        Pengelolaan Sampah Berbasis Siswa 
+          <p>
+            SDN Poris Pelawad 6 telah mengimplementasikan sistem pengelolaan sampah yang melibatkan partisipasi aktif siswa. Setiap kelas memiliki tempat sampah terpilah untuk organik dan anorganik, dan siswa dilatih untuk membuang sampah sesuai kategorinya. Selain itu, sekolah juga mengadakan kegiatan daur ulang kreatif yang melibatkan siswa dalam mengubah sampah menjadi barang yang berguna. 
+          </p>
+      </li>
+      <li>
+        Penanaman Pohon dan Penghijauan 
+        <p>
+          Di tengah area perkotaan yang padat, SDN Poris Pelawad 6 berupaya melakukan penghijauan dengan menanam pohon di sekitar sekolah. Program ini tidak hanya memperindah lingkungan sekolah, tetapi juga berfungsi sebagai sarana edukasi bagi siswa mengenai pentingnya menjaga dan merawat tanaman.   
+        </p>
+    </li>
+     <li>
+      Kurikulum Berbasis Lingkungan 
+          <p>
+            Sekolah ini mengintegrasikan pendidikan lingkungan hidup ke dalam kurikulum dengan memasukkan materi terkait lingkungan pada pelajaran-pelajaran yang relevan. Hal ini bertujuan untuk menumbuhkan kesadaran lingkungan sejak dini dan mengajarkan siswa tentang pentingnya menjaga kelestarian alam.  
+          </p>
+      </li>
+      <li>
+        Kegiatan Ekstrakurikuler Berbasis Lingkungan 
+        <p>
+          SDN Poris Pelawad 6 menawarkan berbagai kegiatan ekstrakurikuler yang berfokus pada pelestarian lingkungan, seperti klub pecinta alam, kelompok daur ulang, dan komunitas kebersihan. Kegiatan ini dirancang untuk menumbuhkan rasa cinta dan tanggung jawab terhadap alam pada diri siswa.  
+        </p>
+    </li>
+  </ol>
+</div>  
+
+<div id="dampak" class="content">
+  <h1 style="color: green;">Dampak Positif</h1>
+  <ol>
+      <li>
+        Peningkatan Kesadaran Lingkungan di kalangan sekolah 
+      </li>
+      <li>
+        terciptanya lingkungan sekolah yang lebih bersih dan sehat
+    </li>
+     <li>
+      Siswa menjadi lebih kreatif dalam mencari solusi untuk permasalahan lingkungan yang ada di sekitar mereka
+    </li>
+  </ol>
+</div>
+<div id="potensi" class="content">
+  <h1 style="color: green;">Potensi Lingkungan Hidup</h1>
+  <ol>
+      <li>
+        Kesadaran Lingkungan yang Tinggi  
+          <p>
+            SDN Poris Pelawad 6 memiliki kesadaran lingkungan yang tinggi baik di kalangan siswa, guru, maupun orang tua. Hal ini terlihat dari partisipasi aktif mereka dalam kegiatan lingkungan yang diselenggarakan oleh sekolah.  
+          </p>
+      </li>
+      <li>
+        Pengelolaan Sampah yang Efektif  
+        <p>
+          Adanya sistem pengelolaan sampah berbasis siswa yang melibatkan pemilahan sampah organik dan anorganik menunjukkan potensi besar dalam mengurangi jumlah sampah di sekolah dan meningkatkan kebersihan lingkungan.      
+        </p>
+    </li>
+     <li>
+      Area Penghijauan yang Dikelola dengan Baik  
+          <p>
+            Meskipun terletak di area perkotaan yang padat, SDN Poris Pelawad 6 berhasil menciptakan area hijau dengan menanam pohon di sekitar sekolah. Ini tidak hanya memperindah lingkungan tetapi juga memberikan edukasi praktis kepada siswa tentang pentingnya penghijauan.   
+          </p>
+      </li>
+      <li>
+        Kurikulum Berbasis Lingkungan 
+        <p>
+          Pendidikan lingkungan hidup yang terintegrasi dalam kurikulum memberikan potensi bagi siswa untuk memahami dan menerapkan praktik ramah lingkungan dalam kehidupan sehari-hari.   
+        </p>
+    </li>
+  </ol>
+</div>
+<div id="masalah" class="content">
+  <h1 style="color: green;">Masalah Lingkungan Hidup</h1>
+  <ol>
+      <li>
+        Tantangan Urbanisasi   
+          <p>
+            Lokasi sekolah yang berada di tengah keramaian kota Tangerang menghadirkan tantangan dalam menjaga kebersihan dan kehijauan lingkungan akibat polusi udara dan kebisingan dari lingkungan sekitar.  
+          </p>
+      </li>
+      <li>
+        Keterbatasan Lahan Hijau   
+        <p>
+          Keterbatasan lahan di area perkotaan dapat menyulitkan sekolah dalam memperluas area penghijauan dan ruang terbuka hijau bagi siswa. 
+        </p>
+    </li>
+     <li>
+      Pengelolaan Sampah yang Menantang   
+          <p>
+            o	Meskipun sudah ada sistem pengelolaan sampah, tantangan tetap ada dalam hal konsistensi dan efektivitas pengelolaan sampah, terutama dalam mengubah perilaku dan kebiasaan siswa secara berkelanjutan. 
+      </li>
+      <li>
+        Sumber Daya dan Dukungan 
+        <p>
+          o	Memerlukan sumber daya yang cukup dan dukungan dari berbagai pihak, termasuk pemerintah dan masyarakat, untuk terus meningkatkan dan mempertahankan pelaksanaan program lingkungan hidup di sekolah.    
+        </p>
+    </li>
+  </ol>
+</div>    
+ 
+    <footer>
+        <div class="social-media">
+                <a href="https://www.instagram.com/sdnporispelawad6?igsh=NXExNnVwcHpuNWh3" class="social-link"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="https://youtube.com/@sdnpp6channel80?feature=shared" class="social-link"><i class="fab fa-youtube"></i> Youtube</a>
+            </div>
+        <p>&copy; 2024 SDN Poris Pelawad 06. All rights reserved.</p>
+    </footer>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('nav-links');
+            navLinks.classList.toggle('active');
+        }
+    
+        // JavaScript untuk memungkinkan geser horizontal pada carousel di mobile
+        const carousel = document.querySelector('.carousel');
+    
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+    
+        carousel.addEventListener('mousedown', (e) => {
+            isDown = true;
+            carousel.classList.add('active');
+            startX = e.pageX - carousel.offsetLeft;
+            scrollLeft = carousel.scrollLeft;
+        });
+    
+        carousel.addEventListener('mouseleave', () => {
+            isDown = false;
+            carousel.classList.remove('active');
+        });
+    
+        carousel.addEventListener('mouseup', () => {
+            isDown = false;
+            carousel.classList.remove('active');
+        });
+    
+        carousel.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - carousel.offsetLeft;
+            const walk = (x - startX) * 2; // Kecepatan scroll
+            carousel.scrollLeft = scrollLeft - walk;
+        });
+    
+        // Mendukung touch event untuk perangkat mobile
+        carousel.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].pageX - carousel.offsetLeft;
+            scrollLeft = carousel.scrollLeft;
+        });
+    
+        carousel.addEventListener('touchmove', (e) => {
+            const x = e.touches[0].pageX - carousel.offsetLeft;
+            const walk = (x - startX) * 2; // Kecepatan scroll
+            carousel.scrollLeft = scrollLeft - walk;
+        });
+        // JavaScript to show content based on selection
+    function showContent(contentId) {
+      const contents = document.querySelectorAll('.content');
+      contents.forEach(content => content.classList.remove('active'));
+      document.getElementById(contentId).classList.add('active');
+    }
+    function showContent(id) {
+  // Sembunyikan semua konten
+  const allContent = document.querySelectorAll(".content");
+  allContent.forEach(content => {
+    content.style.display = "none"; // Semua konten disembunyikan
+  });
+
+  // Tampilkan konten yang dipilih
+  const selectedContent = document.getElementById(id);
+  if (selectedContent) {
+    selectedContent.style.display = "block"; // Tampilkan konten terpilih
+  }
+}
+
+
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,493 @@
+          /* Global Styles */
+         * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+}
+.wrapper {
+    flex: 1;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #708e7a;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem; /* Mengurangi padding */
+    position: relative;
+}
+
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 5px; /* Jarak dari tepi kiri */
+}
+
+.logo-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.logo-text {
+    font-size: 1.4rem; /* Ukuran yang sedikit lebih besar */
+    font-weight: bold;
+    color: white;
+    white-space: nowrap; /* Memastikan teks tetap satu baris */
+}
+
+/* Navigation Links */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-links li:last-child .dropdown-content {
+    right: 0;
+    left: auto;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px; /* Ubah ukuran font jadi sedikit lebih besar */
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+
+    /* Dropdown Styles */
+    .dropdown-content {
+        display: none;
+        position: absolute; /* Pastikan ini ada untuk submenu */
+        background-color: rgb(255, 255, 255);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 999; /* Tambahkan ini agar selalu berada di atas elemen lain */
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown-content a {
+        color: rgb(17, 17, 17);
+        padding: 10px 15px;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f0f0f0;
+    }
+
+    .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+    }
+
+    .hamburger span {
+        width: 25px;
+        height: 3px;
+        background-color: white;
+    }
+
+    .hero {
+            background: url('img/Ekstrakul.png') center/cover no-repeat;
+            position: relative;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            padding: 80px 20px;
+            width: 100%;
+            color: #fff;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero h1, .hero p {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            line-height: 1.3;
+            margin: 0;
+            background: linear-gradient(45deg, #7bdcb5, #fdd835);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+        }
+        .hero-overlay {
+    position: relative;
+    z-index: 2; /* Agar teks berada di atas overlay */
+}
+
+.hero-overlay p {
+    color: white;
+    font-size: clamp(1.5rem, 5vw, 3rem); /* Gunakan clamp untuk responsivitas */
+    font-weight: bold;
+    margin: 0;
+    text-align: center; /* Pastikan teks berada di tengah */
+}
+        /* Container */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 15px;
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 0 10px;
+        }
+        /* Visi dan Misi Section */
+        .visi-misi {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            background-color: #fff;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .foto {
+        flex: 1;
+        max-width: 400px; /* Membatasi ukuran maksimum gambar di layar desktop */
+        margin: 20px;
+    }
+
+    .foto-img {
+        width: 120%; /* Mengatur gambar agar memenuhi wadah */
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Memberi efek bayangan */
+    }
+
+
+    .text-section {
+    flex: 1;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+    margin-left: 80px; /* Memberi jarak dari gambar */
+}
+
+        .visi h2, .misi h2 {
+            color: green;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+        /* Divider Line */
+.divider-line {
+    width: 100%;
+    height: 10px; /* Atur ketebalan garis */
+    background-color: #e0e0e0; /* Warna abu-abu muda */
+    margin: 20px 0; /* Jarak atas dan bawah */
+}
+
+
+/* Pengelompokan Ekstrakurikuler Section */
+.pengelompokan {
+    padding: 20px;
+    text-align: center;
+}
+
+.pengelompokan h2 {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #49783a;
+    margin-bottom: 20px;
+}
+
+.pengelompokan .grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+/* Styling khusus untuk box Ekstrakurikuler Wajib dan Pilihan */
+.box-ekskul-wajib, .box-ekskul-pilihan {
+    background-color: #8dd1b2;
+    padding: 20px; /* Kurangi padding agar lebih kecil di layar sempit */
+    border-radius: 10px;
+    min-height: auto; /* Hapus nilai min-height agar lebih fleksibel */
+    width: 100%; /* Sesuaikan dengan lebar kontainer */
+    max-width: 400px; /* Batasi lebar maksimum */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.box-ekskul-wajib h3, .box-ekskul-pilihan h3 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.box-ekskul-wajib p, .box-ekskul-pilihan p {
+    font-size: 1em;
+    color: #666;
+    margin: 10px 0 0 0;
+}
+.program-section {
+            padding: 20px;
+            max-width: 1000px; /* Batas lebar kontainer */
+            margin: 0 auto; /* Agar elemen di tengah layar */
+            background-color: #ffffff;
+        }
+
+        .program-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Pastikan gambar dan teks dekat */
+            margin-bottom: 20px;
+            padding: 10px 0;
+            gap: 10px; /* Jarak minimal antara teks dan gambar */
+            border-bottom: 1px solid #ddd; /* Garis pembatas antar item */
+        }
+
+        .program-text {
+            flex: 1;
+            padding: 0 10px; /* Sedikit ruang antara teks dan kontainer */
+            text-align: left;
+        }
+
+        .program-text h2 {
+            font-size: 1.5rem; /* Ukuran teks judul */
+            color: #008000; /* Warna hijau */
+            margin-bottom: 5px; /* Jarak kecil di bawah judul */
+        }
+
+        .program-text p {
+            font-size: 1rem;
+            color: #555;
+            margin: 0;
+        }
+
+        .program-image {
+            flex: 1;
+            max-width: 45%; /* Ukuran gambar maksimal */
+            text-align: center;
+        }
+
+        .program-image img {
+            width: 100%; /* Gambar menyesuaikan kolom */
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+       /* Footer Styling */
+footer {
+    background-color: #708e7a;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 30px;
+}
+
+.social-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 10px;
+    flex-wrap: nowrap; /* Mencegah elemen membungkus ke bawah */
+    overflow-x: auto; /* Menambahkan scroll horizontal jika layar terlalu kecil */
+}
+
+.social-link {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.social-link i {
+    margin-right: 8px;
+    font-size: 20px; /* Ukuran tetap untuk ikon */
+}
+
+.social-link:hover {
+    text-decoration: underline;
+}
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            /* Navbar */
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            background-color: #708e7a;
+            padding: 10px;
+            border-radius: 8px;
+            z-index: 9999; /* Memastikan elemen di atas elemen lainnya */
+        }
+
+        .nav-links.active {
+            display: flex;
+        }
+
+        .logo-container {
+        margin-left: 10px; /* Sesuaikan lagi untuk tampilan mobile */
+    }
+
+    .logo-text {
+        font-size: 1rem; /* Ukuran font lebih kecil agar tetap satu baris */
+    }
+        .hamburger {
+            display: flex;
+        }
+
+            /* Hero Section */
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+            .hero {
+        height: 200px; /* Sesuaikan tinggi untuk perangkat kecil */
+    }
+    .hero-overlay p {
+        font-size: clamp(1rem, 4vw, 2rem); /* Sesuaikan ukuran font */
+    }
+            /* Container Layout */
+            .container {
+                flex-direction: column;
+                align-items: center;
+                padding: 0 20px;
+            }
+
+            /* Visi dan Misi adjustments */
+            .visi-misi {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .foto {
+                max-width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+
+            .foto-img {
+                width: 800%; /* Menyusun ulang agar gambar memenuhi wadah di mobile */
+                max-width: 80%; /* Membatasi gambar agar tidak terlalu besar */
+                height: auto; /* Mempertahankan aspek rasio */
+                border-radius: 8px;
+            }
+            .text-section {
+                max-width: 90%; /* Menyesuaikan lebar teks agar tidak terlalu penuh */
+                padding: 0 10px; /* Memberikan jarak di kiri dan kanan */
+                margin: 0 auto; /* Membuat bagian teks berada di tengah */
+            }
+
+            /* Pengelompokan adjustments */
+            .pengelompokan .grid {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            .box-ekskul-wajib, .box-ekskul-pilihan {
+                padding: 15px; /* Kurangi padding di layar sempit */
+                max-width: 90%; /* Batasi lebar agar lebih responsif */
+                margin: 0 auto; /* Pusatkan box di layar */
+            }
+
+            .box-ekskul-wajib h3, .box-ekskul-pilihan h3 {
+                font-size: 1.2em; /* Sesuaikan ukuran teks */
+            }
+
+            .box-ekskul-wajib p, .box-ekskul-pilihan p {
+                font-size: 0.9em; /* Sesuaikan ukuran teks */
+            }
+            .program-item {
+                flex-direction: column; /* Susun vertikal */
+                text-align: center;
+                gap: 10px;
+            }
+
+            .program-image {
+                max-width: 100%;
+            }
+
+            .program-text {
+                padding: 10px 0;
+            }
+
+            .carousel {
+                overflow-x: scroll; /* Pastikan bisa scroll pada layar kecil */
+                display: flex;
+                gap: 10px; /* Spasi antar item */
+                padding: 20px;
+            }
+
+            .carousel-item {
+                flex: 0 0 90%; /* Lebar 90% agar pas di layar kecil */
+                max-width: 100%;
+            }
+
+
+            /* Hide scrollbar on mobile */
+            .carousel::-webkit-scrollbar {
+                display: none;
+            }
+            /* Footer Adjustments */
+        .footer {
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+        .social-link {
+        font-size: 10px; /* Ukuran lebih kecil untuk teks */
+    }
+
+    .social-media {
+        gap: 10px; /* Kurangi jarak antar elemen */
+    }
+
+        }
